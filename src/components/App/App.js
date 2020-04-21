@@ -48,7 +48,7 @@ class App extends React.Component {
     return (
       <div className='App'>
         <header className='App_header'>
-          {/*header component here*/}
+          <Header/>
         </header>
         <main className='App_main'>
           {this.state.hasError && <p className='Error_text'>An error occured, please try again.</p>}
