@@ -4,44 +4,61 @@ import { Input, Button } from '../Utils/Utils';
 
 export default class Game extends React.Component {
     /*ToDos
-        setstates for wager form
-        handle update wager form
+        handle submit wager form resets fields
         setstate for outcome
-        render alert for outcome
-        fix values in updateDrawnNumber
-        fix rendering in renderWagerMessage
+        render modal for outcome
         setstate so after comparison drawnNumber becomes displayNumber and then drawnNumber is re-randomized
         remove comments from functions
     */
     state = {
-        bank: 0,
+        bank: 100,
         currentWager: 0,
+        currentComparison: '',
         displayNumber: 0,
         drawnNumber: 0,
         error: null,
+        formInput: 0,
         formSelect: 'higher',
-        outcome: true,
+        outcome: false,
         timeRemaining: 0,
     }
 
+    updateBank = (num) => {
+        this.setState({
+            bank: num
+        })
+    }
+
+    updateCurrentWager = (ev) => {
+        //on form submit
+    }
+
+    updateCurrentComparison = () => {
+        //on form submit
+    }
+
     updateDisplayNumber = () => {
-        let numsArry = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        let randNum = numsArry[Math.floor(Math.random()*numsArry.length)]
+        let randNum = Math.floor(Math.random()*100)+1
         this.setState({
             displayNumber: randNum
         })
     }
 
     updateDrawnNumber = () => {
-        let numsArry = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        let randNum = numsArry[Math.floor(Math.random()*numsArry.length)]
+        let randNum = Math.floor(Math.random()*100)+1
         if (randNum === this.state.displayNumber) {
-            //reset the value so they don't match
+            this.updateDrawnNumber()
         } else {
             this.setState({
                 drawnNumber: randNum
             })
         }
+    }
+
+    updateFormInput = (ev) => {
+        this.setState({
+            formInput: ev.target.value
+        })
     }
 
     updateFormSelect = (ev) => {
@@ -50,56 +67,113 @@ export default class Game extends React.Component {
         })
     }
 
+    updateOutcome = () => {
+        this.setState({
+            outcome: !this.state.outcome
+        })
+    }
+
     updateTimeRemaining = () => {
+        if (this.state.timeRemaining === 0) {
+            this.setState({ timeRemaining: 180000 })
+            this.handleCompareNumbers()
+            clearInterval(this.state.timeRemaining)
+        }
         this.setState({
           timeRemaining: this.state.timeRemaining - 1000
         })
     }
 
-    //this does not quite work as expected
+    handleWagerSubmit = (ev) => {
+        ev.preventDefault()
+        this.setState({
+            currentComparison: this.state.formSelect,
+            currentWager: this.state.formInput,
+            formInput: 0,
+            formSelect: 'higher'
+        })
+        //somehow reset
+        //this.form.reset() and HTMLFormElement.reset() both crash
+    }
+
+    handleWagerCancel = () => {
+        this.setState({
+            currentWager: 0,
+            formSelect: ''
+        })
+    }
+
+    handleCompareNumbers = () => {
+        //compare display and drawn number
+        /*if (drawn > display && this.state.formSelect === 'higher') || (drawn < display && this.state.formSelect ==='lower') win {
+            add this.state.currentWager to this.state.bank
+        }*/
+        /*else lose {
+            subtract this.state.currentWager from this.state.bank
+        }*/
+        //send to API new bank
+        //set this.state.outcome to true
+        //modal div with the results that has confirmation button that toggles this.state.outcome to false
+    }
+
     renderWagerMessage = () => {
+        const {currentWager, formSelect} = this.state
         if (this.state.currentWager !== 0) {
             return(
-                `<p>You bet {wager} points that the next number will be {formSelect}!</p>`
+                <p>You bet {currentWager} points that the next number will be {formSelect}!</p>
             )
         } else {
             return(
-                `<p>You have not placed a bet, but there is still time!<p>`
+                <p>You have not placed a bet, but there is still time!</p>
+            )
+        }
+    }
+
+    renderPointTotal = () => {
+        const bank = this.state.bank
+        if (bank !== 0) {
+            return(
+                <p>You currently have {bank} points!</p>
+            )
+        } else {
+            return(
+                <p>Sorry, you're out of points!  You can get more under 'My Account'.</p>
             )
         }
     }
 
     componentDidMount() {
-        //set the displayed number
         this.updateDisplayNumber()
 
+        /*
+        //this syntax will be useful after the API is running
         // get the data with the event date 
-        
         const mockTime = new Date(Date.UTC(2020, 4, 1, 12, 0, 0))
         // get the local time, subtract from the event date and set state with the remaining time
         //convert this to tocal timezone of browser
         const currentTime = new Date();
+        */
     
-        const timeRemaining = mockTime.getTime() - currentTime;
+        //this is for testing client side only and will be replaced with API call later
+        const timeRemaining = 180000;
         this.setState({
           timeRemaining
         })
-        // start interval so on every second we update the state timeremaining
+
         setInterval(this.updateTimeRemaining, 1000)
     }
     
     componentWillUnmount() {
-        // clear the interval
         clearInterval(this.state.timeRemaining)
     }
 
     render() {
         const mins = Math.floor(this.state.timeRemaining / 60000);
         const seconds = Math.floor((this.state.timeRemaining / 1000) % 60)
-        let error = this.state.error
+        let bank = this.state.bank
         let displayNumber = this.state.displayNumber
-        let wager = this.state.currentWager
-        let formSelect = this.state.formSelect
+        let error = this.state.error
+        
 
         return (
             <section>
@@ -108,7 +182,10 @@ export default class Game extends React.Component {
                     <p>Time remaining: {mins} minutes and {seconds} seconds</p>
                     {this.renderWagerMessage()}
                 </section>
-                <form className='wagerform'>
+                <form 
+                    className='wagerform'
+                    onSubmit={this.handleWagerSubmit}
+                >
                     <div className='alert'>
                         {error && <p className='red'>{error}</p>}
                     </div>
@@ -120,26 +197,38 @@ export default class Game extends React.Component {
                             name='pointwager'
                             id='pointwager'
                             type='number'
+                            min='0'
+                            max={bank}
+                            onChange={this.updateFormInput}
                             required
                         >
                         </Input>
+                        <span>points </span>
                         <label htmlFor='comparison'>
-                            The next number will be
+                            the next number will be
                         </label>
                         <select
                             name='comparison'
                             id='comparison'
                             onChange={this.updateFormSelect}
                         >
-                            <option value ='higher'>Higher</option>
-                            <option value = 'lower'>Lower</option>
+                            <option value ='higher'>higher</option>
+                            <option value = 'lower'>lower</option>
                         </select>
                         <Button
                             type='submit'
+                            onClick={this.handleWagerSubmit}
                         >
                             Update wager
                         </Button>
+                        <Button
+                            type='reset'
+                            onClick={this.handleWagerCancel}
+                        >
+                            Cancel wager
+                        </Button>
                     </div>
+                    {this.renderPointTotal()}
                 </form>
             </section>
         )
