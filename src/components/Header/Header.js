@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class Header extends React.Component {
+    /*
+      ToDo
+        actual auth logout
+        change link on the h1 to not go to '/' if logged in  
+    */
     state = {
         fakeLogin: false
     }
