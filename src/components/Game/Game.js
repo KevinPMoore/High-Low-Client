@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '../Utils/Utils';
+import './Game.css';
 
 export default class Game extends React.Component {
     /*ToDos
         handle submit wager form resets fields
-        setstate for outcome
-        render modal for outcome
+        render modal for outcome in handleCompareNumbers
         setstate so after comparison drawnNumber becomes displayNumber and then drawnNumber is re-randomized
         remove comments from functions
     */
@@ -19,6 +19,7 @@ export default class Game extends React.Component {
         error: null,
         formInput: 0,
         formSelect: 'higher',
+        modal: 'hidden',
         outcome: false,
         timeRemaining: 0,
     }
@@ -27,14 +28,6 @@ export default class Game extends React.Component {
         this.setState({
             bank: num
         })
-    }
-
-    updateCurrentWager = (ev) => {
-        //on form submit
-    }
-
-    updateCurrentComparison = () => {
-        //on form submit
     }
 
     updateDisplayNumber = () => {
@@ -67,6 +60,18 @@ export default class Game extends React.Component {
         })
     }
 
+    updateModal = () => {
+        if (this.state.modal === 'hidden') {
+            this.setState({
+                modal: 'modal'
+            })
+        } else {
+            this.setState({
+                modal: 'hidden'
+            })
+        }
+    }
+
     updateOutcome = () => {
         this.setState({
             outcome: !this.state.outcome
@@ -92,7 +97,7 @@ export default class Game extends React.Component {
             formInput: 0,
             formSelect: 'higher'
         })
-        //somehow reset
+        //somehow reset the form
         //this.form.reset() and HTMLFormElement.reset() both crash
     }
 
@@ -104,16 +109,49 @@ export default class Game extends React.Component {
     }
 
     handleCompareNumbers = () => {
-        //compare display and drawn number
-        /*if (drawn > display && this.state.formSelect === 'higher') || (drawn < display && this.state.formSelect ==='lower') win {
-            add this.state.currentWager to this.state.bank
-        }*/
-        /*else lose {
-            subtract this.state.currentWager from this.state.bank
-        }*/
-        //send to API new bank
-        //set this.state.outcome to true
-        //modal div with the results that has confirmation button that toggles this.state.outcome to false
+        console.log('handleCompareNumbers ran')
+        let wager = this.state.currentWager
+        if ((this.state.drawnNumber > this.state.displayNumber && this.state.formSelect === 'higher') || (this.state.drawnNumber < this.state.displayNumber && this.state.formSelect === 'lower')) {
+            console.log('winner')
+            this.setState({
+                bank: this.state.bank + this.state.currentWager,
+                outcome: true
+            })
+            //api call to update server
+            this.updateModal()
+            this.renderWinMessage(wager)
+        } else {
+            console.log('loser')
+            this.setState({
+                bank: this.state.bank - this.state.currentWager,
+                outcome: false
+            })
+            //api call to update server
+            this.updateModal()
+            this.renderLoseMessage(wager)
+        }
+    }
+
+    renderWinMessage = (wager) => {
+        return(
+            <div className={this.state.modal}>
+                <div className='modal_content'>
+                    <Button className='close' aria-label='Close modal box' onClick={this.updateModal}>&times;</Button>
+                    <p>Congratulations!  You won {wager} points!  Your new total is {this.state.bank} points. Keep it up!</p>
+                </div>
+            </div>
+        )
+    }
+
+    renderLoseMessage = (wager) => {
+        return(
+            <div className={this.state.modal}>
+            <div className='modal_content'>
+                <Button className='close' aria-label='Close modal box' onClick={this.updateModal}>&times;</Button>
+                <p>Awww shucks!  You lost {wager} points.  Your new total is {this.state.bank} points.  Better luck next time!</p>
+            </div>
+        </div>
+        )
     }
 
     renderWagerMessage = () => {
@@ -144,6 +182,7 @@ export default class Game extends React.Component {
 
     componentDidMount() {
         this.updateDisplayNumber()
+        this.updateDrawnNumber()
 
         /*
         //this syntax will be useful after the API is running
