@@ -7,9 +7,6 @@ export default class Header extends React.Component {
         actual auth logout
         change link on the h1 to not go to '/' if logged in  
     */
-    state = {
-        fakeLogin: false
-    }
 
     handleLogoutClick = () => {
         //clear auth token
@@ -18,8 +15,14 @@ export default class Header extends React.Component {
     renderLogout() {
         return (
             <div className='Header_loggedin'>
+                <Link to='/game'>
+                    Game
+                </Link>
+                <Link to='/account'>
+                    Account
+                </Link>
                 <Link
-                    onClick={this.handleLogoutClick}
+                    onClick={this.props.updateLoggedIn}
                     to='/'
                 >
                   Logout
@@ -50,7 +53,7 @@ export default class Header extends React.Component {
                     </Link>
                 </h1>
                 <span className='tagline'>Test your luck</span>
-                {this.state.fakeLogin ? this.renderLogout() : this.renderLogin()}
+                {this.props.loggedIn === true ? this.renderLogout() : this.renderLogin()}
             </nav>
         )
     }

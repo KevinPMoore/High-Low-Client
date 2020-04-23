@@ -11,10 +11,17 @@ export default class Login extends React.Component {
         username: '',
     }
 
-    updateUsername = (name) => {
+    updateUsername = (ev) => {
         this.setState({
-            username: name
+            username: ev.target.value
         })
+    }
+
+    handleFakeSubmit = (ev) => {
+        ev.preventDefault()
+        this.props.updateUser(this.state.username)
+        this.props.updateLoggedIn()
+        this.props.history.push('/game')
     }
 
     /* 
@@ -44,6 +51,7 @@ export default class Login extends React.Component {
         return (
             <form
                 className='loginform'
+                onSubmit={this.handleFakeSubmit}
             >
                 {/*onSubmit={this.handleSubmitJwtAuth}*/}
                 <div className='alert'>
@@ -58,6 +66,7 @@ export default class Login extends React.Component {
                         id='login_user_name'
                         placeholder='ex. CoolGuyJokes87'
                         required
+                        onChange={this.updateUsername}
                     >
                     </Input>
                 </div>

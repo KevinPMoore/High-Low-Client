@@ -8,28 +8,6 @@ import Game from '../../routes/Game/GameRoute';
 import Account from '../../routes/Account/AccountRoute';
 import NotFound from '../../routes/NotFound/NotFoundRoute';
 
-/*
-data:
-  - timeRemaining,
-  - currentWager,
-  - formInput,
-  - bank,
-  - outcome,
-  - displayNumber,
-  - drawnNumber,
-
-
-elements:
-  - form
-    - amount to wager up to value of bank
-  - currentWager
-  - displayNumber
-  - timeRemaining
-  - outcome display (displayNumber vs drawnNumber)
-
-
-*/
-
 class App extends React.Component {
 
   state = {
@@ -68,7 +46,7 @@ class App extends React.Component {
     return (
       <div className='App'>
         <header className='App_header'>
-          <Header/>
+          <Header loggedIn={this.state.loggedIn} updateLoggedIn={this.updateLoggedIn}/>
         </header>
         <main className='App_main'>
           {this.state.hasError && <p className='Error_text'>An error occured, please try again.</p>}
@@ -83,13 +61,13 @@ class App extends React.Component {
             <Route
              /*MAKE PUBLIC ONLY*/
              path={'/login'}
-             component={Login}
+             render={(routeProps) => (<Login {...routeProps} updateUser={this.updateUser} updateLoggedIn={this.updateLoggedIn}/>)}
             />
 
             <Route
              /*MAKE PUBLIC ONLY*/
              path={'/signup'}
-             component={SignUp}
+             render={(routeProps) => (<SignUp {...routeProps} updateUser={this.updateUser} updateLoggedIn={this.updateLoggedIn}/>)}
             />
 
             <Route

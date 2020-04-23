@@ -6,7 +6,6 @@ import './Game.css';
 export default class Game extends React.Component {
     /*ToDos
         handle submit wager form resets fields
-        render modal for outcome in handleCompareNumbers
         setstate so after comparison drawnNumber becomes displayNumber and then drawnNumber is re-randomized
         remove comments from functions
     */
@@ -108,7 +107,6 @@ export default class Game extends React.Component {
 
     handleCompareNumbers = () => {
         console.log('handleCompareNumbers ran')
-        let wager = this.state.currentWager
         if ((this.state.drawnNumber > this.state.displayNumber && this.state.formSelect === 'higher') || (this.state.drawnNumber < this.state.displayNumber && this.state.formSelect === 'lower')) {
             const winnings = this.props.bank + this.state.currentWager
             this.props.updateBank(winnings)

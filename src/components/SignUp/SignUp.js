@@ -6,7 +6,23 @@ export default class SignUp extends React.Component {
         onSignUpSuccess: () => {}
     }
 
-    state = { error: null }
+    state = { 
+        error: null,
+        username: ''
+    }
+
+    updateUsername = (ev) => {
+        this.setState({
+            username: ev.target.value
+        })
+    }
+
+    handleFakeSubmit = (ev) => {
+        ev.preventDefault()
+        this.props.updateUser(this.state.username)
+        this.props.updateLoggedIn()
+        this.props.history.push('/game')
+    }
 
     /* 
     handleSubmit = ev => {
@@ -39,6 +55,7 @@ export default class SignUp extends React.Component {
         return (
             <form
                 className='signup_form'
+                onSubmit={this.handleFakeSubmit}
             >
                 {/*onSubmit={this.handleSubmit}*/}
                 <div className='alert'>
@@ -54,11 +71,12 @@ export default class SignUp extends React.Component {
                       id='signup_user_name'
                       placeholder='ex. CoolGuyJokes87'
                       required
+                      onChange={this.updateUsername}
                     >
                     </Input>
                 </div>
                 <div className='password'>
-                    <label htmlfor='signup_password'>
+                    <label htmlFor='signup_password'>
                         Password <Required />
                     </label>
                     <Input
