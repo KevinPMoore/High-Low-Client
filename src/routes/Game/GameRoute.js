@@ -7,7 +7,7 @@ export default class GameRoute extends React.Component {
     render() {
         return (
             <Section className="game">
-                <Game />
+                <Game bank={this.props.bank} updateBank={this.props.updateBank}/>
             </Section>
         )
     }

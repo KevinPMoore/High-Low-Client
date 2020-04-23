@@ -11,7 +11,6 @@ export default class Game extends React.Component {
         remove comments from functions
     */
     state = {
-        bank: 100,
         currentWager: 0,
         currentComparison: '',
         displayNumber: 0,
@@ -22,12 +21,6 @@ export default class Game extends React.Component {
         modal: 'hidden',
         outcome: false,
         timeRemaining: 0,
-    }
-
-    updateBank = (num) => {
-        this.setState({
-            bank: num
-        })
     }
 
     updateDisplayNumber = () => {
@@ -89,6 +82,11 @@ export default class Game extends React.Component {
         })
     }
 
+    //with API later
+    setInitialState = () => {
+        //get state from API then call this in componentDidMount
+    }
+
     handleWagerSubmit = (ev) => {
         ev.preventDefault()
         this.setState({
@@ -112,46 +110,45 @@ export default class Game extends React.Component {
         console.log('handleCompareNumbers ran')
         let wager = this.state.currentWager
         if ((this.state.drawnNumber > this.state.displayNumber && this.state.formSelect === 'higher') || (this.state.drawnNumber < this.state.displayNumber && this.state.formSelect === 'lower')) {
-            console.log('winner')
+            const winnings = this.props.bank + this.state.currentWager
+            this.props.updateBank(winnings)
             this.setState({
-                bank: this.state.bank + this.state.currentWager,
                 outcome: true
             })
             //api call to update server
             this.updateModal()
-            this.renderWinMessage(wager)
         } else {
-            console.log('loser')
+            const losings = this.props.bank + this.state.currentWager
+            this.props.updateBank(losings)
             this.setState({
-                bank: this.state.bank - this.state.currentWager,
                 outcome: false
             })
             //api call to update server
             this.updateModal()
-            this.renderLoseMessage(wager)
         }
     }
 
-    renderWinMessage = (wager) => {
-        return(
-            <div className={this.state.modal}>
-                <div className='modal_content'>
-                    <Button className='close' aria-label='Close modal box' onClick={this.updateModal}>&times;</Button>
-                    <p>Congratulations!  You won {wager} points!  Your new total is {this.state.bank} points. Keep it up!</p>
+    renderModal = () => {
+        const wager = this.state.currentWager
+        if (this.state.outcome === true) {
+            return(
+                <div className={this.state.modal}>
+                    <div className='modal_content'>
+                        <Button className='close' onClick={this.updateModal}>&times;</Button>
+                        <p>Congratulations!  You won {wager} points!  Your new total is {this.props.bank} points. Keep it up!</p>
+                    </div>
                 </div>
-            </div>
-        )
-    }
-
-    renderLoseMessage = (wager) => {
-        return(
-            <div className={this.state.modal}>
-            <div className='modal_content'>
-                <Button className='close' aria-label='Close modal box' onClick={this.updateModal}>&times;</Button>
-                <p>Awww shucks!  You lost {wager} points.  Your new total is {this.state.bank} points.  Better luck next time!</p>
-            </div>
-        </div>
-        )
+            )
+        } else {
+            return(
+                <div className={this.state.modal}>
+                    <div className='modal_content'>
+                        <Button className='close' onClick={this.updateModal}>&times;</Button>
+                        <p>Awww shucks!  You lost {wager} points.  Your new total is {this.props.bank} points.  Better luck next time!</p>
+                    </div>
+                </div>
+            )
+        }
     }
 
     renderWagerMessage = () => {
@@ -168,7 +165,7 @@ export default class Game extends React.Component {
     }
 
     renderPointTotal = () => {
-        const bank = this.state.bank
+        const bank = this.props.bank
         if (bank !== 0) {
             return(
                 <p>You currently have {bank} points!</p>
@@ -209,13 +206,14 @@ export default class Game extends React.Component {
     render() {
         const mins = Math.floor(this.state.timeRemaining / 60000);
         const seconds = Math.floor((this.state.timeRemaining / 1000) % 60)
-        let bank = this.state.bank
+        let bank = this.props.bank
         let displayNumber = this.state.displayNumber
         let error = this.state.error
         
 
         return (
             <section>
+                {this.renderModal()}
                 <section className='countdown'>
                     <p>The current number is {displayNumber}</p>
                     <p>Time remaining: {mins} minutes and {seconds} seconds</p>

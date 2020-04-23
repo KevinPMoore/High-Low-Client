@@ -7,7 +7,14 @@ export default class Login extends React.Component {
     }
 
     state = {
-        error: null
+        error: null,
+        username: '',
+    }
+
+    updateUsername = (name) => {
+        this.setState({
+            username: name
+        })
     }
 
     /* 

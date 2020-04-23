@@ -33,14 +33,34 @@ elements:
 class App extends React.Component {
 
   state = {
-    user: false,
+    bank: 10,
     hasError: false,
+    loggedIn: false,
+    user: 'test',
   }
 
-  handleUser() {
-    this.setState(state => ({
-      user: !this.state.user
-    }))
+  updateBank = (num) => {
+    this.setState({
+        bank: num
+    })
+  }
+
+  updateHasError = () => {
+    this.setState({
+      hasError: !this.state.hasError
+    })
+  }
+
+  updateLoggedIn = () => {
+    this.setState({
+      loggedIn: !this.state.loggedIn
+    })
+  }
+
+  updateUser = (name) => {
+    this.setState({
+      user: name
+    })
   }
 
   render() {
@@ -75,13 +95,13 @@ class App extends React.Component {
             <Route
              /*MAKE PRIVATE ONLY*/
              path={'/game'}
-             component={Game}
+             render={(routeProps) => (<Game {...routeProps} bank={this.state.bank} updateBank={this.updateBank}/>)}
             />
 
             <Route
              /*MAKE PRIVATE ONLY*/
              path={'/account'}
-             component={Account}
+             render={(routeProps) => (<Account {...routeProps} bank={this.state.bank} user={this.state.user} updateBank={this.updateBank}/>)}
             />
 
             <Route

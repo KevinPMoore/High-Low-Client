@@ -1,0 +1,26 @@
+.confirm {
+    color: #aaaaaa;
+    font-size: 18px;
+    margin-right: 10%;
+  }
+  
+  .confirm:hover,
+  .confirm:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .cancel_top_up {
+    color: #aaaaaa;
+    font-size: 18px;
+    margin-left: 10%;
+  }
+
+  .cancel_top_up:hover,
+  .cancel_top_up:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
