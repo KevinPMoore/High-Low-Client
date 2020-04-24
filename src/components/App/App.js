@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from '../Header/Header';
 import Home from '../../routes/Home/HomeRoute';
@@ -11,7 +11,7 @@ import NotFound from '../../routes/NotFound/NotFoundRoute';
 class App extends React.Component {
 
   state = {
-    bank: 10,
+    bank: 100,
     hasError: false,
     loggedIn: false,
     user: 'test',

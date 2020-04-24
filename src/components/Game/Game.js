@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { Input, Button } from '../Utils/Utils';
 import './Game.css';
 
@@ -17,6 +16,7 @@ export default class Game extends React.Component {
         error: null,
         formInput: 0,
         formSelect: 'higher',
+        interval: 0,
         modal: 'hidden',
         outcome: false,
         timeRemaining: 0,
@@ -74,7 +74,7 @@ export default class Game extends React.Component {
         if (this.state.timeRemaining === 0) {
             this.setState({ timeRemaining: 180000 })
             this.handleCompareNumbers()
-            clearInterval(this.state.timeRemaining)
+            clearInterval(this.state.interval)
         }
         this.setState({
           timeRemaining: this.state.timeRemaining - 1000
@@ -106,9 +106,8 @@ export default class Game extends React.Component {
     }
 
     handleCompareNumbers = () => {
-        console.log('handleCompareNumbers ran')
-        if ((this.state.drawnNumber > this.state.displayNumber && this.state.formSelect === 'higher') || (this.state.drawnNumber < this.state.displayNumber && this.state.formSelect === 'lower')) {
-            const winnings = this.props.bank + this.state.currentWager
+        if (((this.state.drawnNumber > this.state.displayNumber) && this.state.formSelect === 'higher') || ((this.state.drawnNumber < this.state.displayNumber) && this.state.formSelect === 'lower')) {
+            const winnings = (+this.props.bank + +this.state.currentWager)
             this.props.updateBank(winnings)
             this.setState({
                 outcome: true
@@ -116,7 +115,7 @@ export default class Game extends React.Component {
             //api call to update server
             this.updateModal()
         } else {
-            const losings = this.props.bank + this.state.currentWager
+            const losings = (+this.props.bank - +this.state.currentWager)
             this.props.updateBank(losings)
             this.setState({
                 outcome: false
@@ -133,7 +132,7 @@ export default class Game extends React.Component {
                 <div className={this.state.modal}>
                     <div className='modal_content'>
                         <Button className='close' onClick={this.updateModal}>&times;</Button>
-                        <p>Congratulations!  You won {wager} points!  Your new total is {this.props.bank} points. Keep it up!</p>
+                        <p>The next number was {this.state.drawnNumber}.  Congratulations!  You won {wager} points!  Your new total is {this.props.bank} points. Keep it up!</p>
                     </div>
                 </div>
             )
@@ -142,7 +141,7 @@ export default class Game extends React.Component {
                 <div className={this.state.modal}>
                     <div className='modal_content'>
                         <Button className='close' onClick={this.updateModal}>&times;</Button>
-                        <p>Awww shucks!  You lost {wager} points.  Your new total is {this.props.bank} points.  Better luck next time!</p>
+                        <p>The next number was {this.state.drawnNumber}.  Awww shucks!  You lost {wager} points.  Your new total is {this.props.bank} points.  Better luck next time!</p>
                     </div>
                 </div>
             )
@@ -150,10 +149,10 @@ export default class Game extends React.Component {
     }
 
     renderWagerMessage = () => {
-        const {currentWager, formSelect} = this.state
+        const {currentWager, currentComparison} = this.state
         if (this.state.currentWager !== 0) {
             return(
-                <p>You bet {currentWager} points that the next number will be {formSelect}!</p>
+                <p>You bet {currentWager} points that the next number will be {currentComparison}!</p>
             )
         } else {
             return(
@@ -187,18 +186,19 @@ export default class Game extends React.Component {
         //convert this to tocal timezone of browser
         const currentTime = new Date();
         */
+
+        let interval = setInterval(this.updateTimeRemaining, 1000)
     
         //this is for testing client side only and will be replaced with API call later
         const timeRemaining = 180000;
         this.setState({
-          timeRemaining
+          timeRemaining,
+          interval
         })
-
-        setInterval(this.updateTimeRemaining, 1000)
     }
     
     componentWillUnmount() {
-        clearInterval(this.state.timeRemaining)
+        clearInterval(this.state.interval)
     }
 
     render() {
@@ -254,7 +254,7 @@ export default class Game extends React.Component {
                             type='submit'
                             onClick={this.handleWagerSubmit}
                         >
-                            Update wager
+                            Set wager
                         </Button>
                         <Button
                             type='reset'

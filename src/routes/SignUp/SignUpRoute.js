@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Section } from '../../components/Utils/Utils';
 import SignUp from '../../components/SignUp/SignUp';
 

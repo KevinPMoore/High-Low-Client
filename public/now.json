@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "alias": "kpmoore-high-low-app",
+    "name": "high-low",
+    "routes": [
+        { "handle": "filesystem" },
+        { "src": "/.*", "dest": "/index.html" }
+    ]
+  }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Input } from '../Utils/Utils';
 
 export default class Login extends React.Component {
@@ -21,7 +21,7 @@ export default class Login extends React.Component {
         ev.preventDefault()
         this.props.updateUser(this.state.username)
         this.props.updateLoggedIn()
-        this.props.history.push('/game')
+        this.props.onLoginSuccess()
     }
 
     /* 

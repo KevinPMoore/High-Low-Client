@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Account from '../../components/Account/Account';
 import { Section } from '../../components/Utils/Utils';
 
