@@ -9,7 +9,7 @@ export default class Game extends React.Component {
         remove comments from functions
     */
     state = {
-        currentWager: 0,
+        currentWager: null,
         currentComparison: '',
         displayNumber: 0,
         drawnNumber: 0,
@@ -72,7 +72,7 @@ export default class Game extends React.Component {
 
     updateTimeRemaining = () => {
         if (this.state.timeRemaining === 0) {
-            this.setState({ timeRemaining: 180000 })
+            this.setState({ timeRemaining: 120000 })
             this.handleCompareNumbers()
             clearInterval(this.state.interval)
         }
@@ -94,6 +94,8 @@ export default class Game extends React.Component {
             formInput: 0,
             formSelect: 'higher'
         })
+        
+        
         //somehow reset the form
         //this.form.reset() and HTMLFormElement.reset() both crash
     }
@@ -106,7 +108,13 @@ export default class Game extends React.Component {
     }
 
     handleCompareNumbers = () => {
-        if (((this.state.drawnNumber > this.state.displayNumber) && this.state.formSelect === 'higher') || ((this.state.drawnNumber < this.state.displayNumber) && this.state.formSelect === 'lower')) {
+        if (this.state.currentWager === null) {
+            this.updateDrawnNumber()
+            this.updateDisplayNumber()
+            this.setState({
+                timeRemaining: 120000
+            })
+        } else if (((this.state.drawnNumber > this.state.displayNumber) && this.state.formSelect === 'higher') || ((this.state.drawnNumber < this.state.displayNumber) && this.state.formSelect === 'lower')) {
             const winnings = (+this.props.bank + +this.state.currentWager)
             this.props.updateBank(winnings)
             this.setState({
@@ -150,7 +158,7 @@ export default class Game extends React.Component {
 
     renderWagerMessage = () => {
         const {currentWager, currentComparison} = this.state
-        if (this.state.currentWager !== 0) {
+        if ((this.state.currentWager !== 0) && (this.state.currentWager !== null)) {
             return(
                 <p>You bet {currentWager} points that the next number will be {currentComparison}!</p>
             )
@@ -190,7 +198,7 @@ export default class Game extends React.Component {
         let interval = setInterval(this.updateTimeRemaining, 1000)
     
         //this is for testing client side only and will be replaced with API call later
-        const timeRemaining = 180000;
+        const timeRemaining = 120000;
         this.setState({
           timeRemaining,
           interval
