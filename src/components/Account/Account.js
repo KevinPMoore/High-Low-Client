@@ -4,6 +4,7 @@ import './Account.css';
 
 export default class Account extends React.Component {
     state = {
+        username: '',
         topUp: 'hidden',
     }
 
@@ -24,9 +25,15 @@ export default class Account extends React.Component {
         this.updateTopUp()
     }
 
+    componentDidMount() {
+        this.setState({
+            username: this.props.user
+        })
+    }
+
     render() {
         const bank = this.props.bank
-        const user = this.props.user
+        const user = this.state.username
         return (
             <div className='user_info'>
                 <p>User name: <span>{user}</span></p>

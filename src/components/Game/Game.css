@@ -1,3 +1,24 @@
+.GameRoute {
+    margin-top: 100px;
+}
+
+.display {
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bignumber {
+    color: white;
+    align-self: center;
+    font-size: 100px;
+}
+
 .modal {
     display: block;
     position: fixed;
@@ -38,6 +59,33 @@ text-decoration: none;
 cursor: pointer;
 }
 
+#pointwager {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
 .invalid {
     border: 2px dashed red;
+}
+
+#comparison {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.wagerbuttons {
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 8px;
+}
+
+.setwager {
+    height: 40px;
+    width: 60px;
+}
+
+.resetwager {
+    height: 40px;
+    width: 60px;
 }

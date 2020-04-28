@@ -1,0 +1,37 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: grey;
+}
+
+.notloggedin {
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.loggedin {
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.loginlink {
+    max-height: 30px;
+}
+
+.navbutton {
+    min-height: 30px;
+    max-height: 50px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.navbutton:hover {
+    cursor: pointer;
+}

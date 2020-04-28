@@ -114,9 +114,9 @@ export default class Game extends React.Component {
                 validation: 'valid'
             })
         } else {
-          this.setState({
-              validation: 'invalid'
-          }) 
+            this.setState({
+                validation: 'invalid'
+            }) 
         }
         
         //somehow reset the form
@@ -133,26 +133,29 @@ export default class Game extends React.Component {
     handleCompareNumbers = () => {
         if (this.state.currentWager === null) {
             //to be replaced by server call
+            let interval = setInterval(this.updateTimeRemaining, 1000)
             this.setNumbers()
             this.setState({
                 timeRemaining: 120000,
-                currentWager: null
+                currentWager: null,
+                interval: interval
             })
-        } else if (((this.state.drawnNumber > this.state.displayNumber) && this.state.formSelect === 'higher') || ((this.state.drawnNumber < this.state.displayNumber) && this.state.formSelect === 'lower')) {
+        } else if (((this.state.drawnNumber > this.state.displayNumber) && this.state.currentComparison === 'higher') || ((this.state.drawnNumber < this.state.displayNumber) && this.state.currentComparison === 'lower')) {
             const winnings = (+this.props.bank + +this.state.currentWager)
             this.props.updateBank(winnings)
             this.setState({
                 outcome: true
             })
             //api call to update server
-            this.updateModal().then(
+            this.updateModal()
             //to be replaced by server call
-            this.setNumbers(),
+            let interval = setInterval(this.updateTimeRemaining, 1000)
+            this.setNumbers()
             this.setState({
                 timeRemaining: 120000,
-                currentWager: null
+                currentWager: null,
+                interval: interval
             })
-          )
         } else {
             const losings = (+this.props.bank - +this.state.currentWager)
             this.props.updateBank(losings)
@@ -160,13 +163,15 @@ export default class Game extends React.Component {
                 outcome: false
             })
             //api call to update server
-            this.updateModal().then(
-                this.setNumbers(),
-                this.setState({
-                    timeRemaining: 120000,
-                    currentWager: null
-                })
-            )
+            this.updateModal()
+            //to be replaced by server call
+            let interval = setInterval(this.updateTimeRemaining, 1000)
+            this.setNumbers()
+            this.setState({
+                timeRemaining: 120000,
+                currentWager: null,
+                interval: interval
+            })
         }
     }
 
@@ -257,7 +262,8 @@ export default class Game extends React.Component {
             <section>
                 {this.renderModal()}
                 <section className='countdown'>
-                    <p>The current number is {displayNumber}</p>
+                    <p>The current number is</p>
+                    <div className='display'><p className='bignumber'>{displayNumber}</p></div>
                     <p>Time remaining: {mins} minutes and {seconds} seconds</p>
                     {this.renderWagerMessage()}
                 </section>
@@ -269,44 +275,50 @@ export default class Game extends React.Component {
                         {error && <p className='red'>{error}</p>}
                     </div>
                     <div className='wager'>
-                        <label htmlFor='pointwager'>
-                            I bet
-                        </label>
-                        <Input
-                            className={this.state.validation}
-                            name='pointwager'
-                            id='pointwager'
-                            type='number'
-                            min='0'
-                            max={bank}
-                            onChange={this.updateFormInput}
-                            required
-                        >
-                        </Input>
-                        <span>points </span>
-                        <label htmlFor='comparison'>
-                            the next number will be
-                        </label>
-                        <select
-                            name='comparison'
-                            id='comparison'
-                            onChange={this.updateFormSelect}
-                        >
-                            <option value ='higher'>higher</option>
-                            <option value = 'lower'>lower</option>
-                        </select>
-                        <Button
-                            type='submit'
-                            onClick={this.handleWagerSubmit}
-                        >
-                            Set wager
-                        </Button>
-                        <Button
-                            type='reset'
-                            onClick={this.handleWagerCancel}
-                        >
-                            Cancel wager
-                        </Button>
+                        <div className='wagerinputs'>
+                            <label htmlFor='pointwager'>
+                                I bet
+                            </label>
+                            <Input
+                                className={this.state.validation}
+                                name='pointwager'
+                                id='pointwager'
+                                type='number'
+                                min='0'
+                                max={bank}
+                                onChange={this.updateFormInput}
+                                required
+                            >
+                            </Input>
+                            <span>points </span>
+                            <label htmlFor='comparison'>
+                                the next number will be
+                            </label>
+                            <select
+                                name='comparison'
+                                id='comparison'
+                                onChange={this.updateFormSelect}
+                            >
+                                <option value ='higher'>higher</option>
+                                <option value = 'lower'>lower</option>
+                            </select>
+                        </div>
+                        <div className='wagerbuttons'>
+                            <Button
+                                className='setwager'
+                                type='submit'
+                                onClick={this.handleWagerSubmit}
+                            >
+                                Set wager
+                            </Button>
+                            <Button
+                                className='resetwager'
+                                type='reset'
+                                onClick={this.handleWagerCancel}
+                            >
+                                Cancel wager
+                            </Button>
+                        </div>
                     </div>
                     {this.renderPointTotal()}
                 </form>

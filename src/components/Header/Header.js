@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '../Utils/Utils';
+import './Header.css';
 
 export default class Header extends React.Component {
     /*
@@ -14,18 +16,24 @@ export default class Header extends React.Component {
 
     renderLogout() {
         return (
-            <div className='Header_loggedin'>
+            <div className='loggedin'>
                 <Link to='/game'>
-                    Game
+                    <Button className='navbutton'>
+                        Game
+                    </Button>
                 </Link>
                 <Link to='/account'>
-                    Account
+                    <Button className='navbutton'>
+                        Account
+                    </Button>
                 </Link>
                 <Link
                     onClick={this.props.updateLoggedIn}
                     to='/'
                 >
-                  Logout
+                    <Button className='navbutton'>
+                        Logout
+                    </Button>
                 </Link>
             </div>
         )
@@ -33,12 +41,22 @@ export default class Header extends React.Component {
 
     renderLogin() {
         return (
-            <div className='Header_notloggedin'>
-                <Link to='/login'>
-                    Log In
+            <div className='notloggedin'>
+                <Link 
+                    className='loginlink' 
+                    to='/login'
+                >
+                    <Button className='navbutton'>
+                        Log In
+                    </Button>
                 </Link>
-                <Link to='/signup'>
-                    Sign Up
+                <Link 
+                    className='signuplink' 
+                    to='/signup'
+                >
+                    <Button className='navbutton'>
+                        Sign Up
+                    </Button>
                 </Link>
             </div>
         )
@@ -47,12 +65,14 @@ export default class Header extends React.Component {
     render() {
         return (
             <nav className='Header'>
-                <h1>
-                    <Link to='/'>
-                        High-Low
-                    </Link>
-                </h1>
-                <span className='tagline'>Test your luck</span>
+                <div className='home'>
+                    <h1>
+                        <Link to='/'>
+                            High-Low
+                        </Link>
+                    </h1>
+                    <span className='tagline'>Test your luck</span>
+                </div>
                 {this.props.loggedIn === true ? this.renderLogout() : this.renderLogin()}
             </nav>
         )

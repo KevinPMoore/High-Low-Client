@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Input, Required } from '../Utils/Utils';
+import './SignUp.css';
 
 export default class SignUp extends React.Component {
     static defaultProps= {

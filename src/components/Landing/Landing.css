@@ -1,6 +1,7 @@
 .landing {
     display: flex;
     justify-content: center;
+    margin-top: 50px;
 }
 
 .landing_section {
@@ -33,4 +34,8 @@
 .landing_paragraph {
     margin: 0 auto;
     max-width: 650px;
+}
+
+button:hover {
+    cursor: pointer;
 }
