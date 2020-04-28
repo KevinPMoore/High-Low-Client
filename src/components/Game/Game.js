@@ -20,6 +20,7 @@ export default class Game extends React.Component {
         modal: 'hidden',
         outcome: false,
         timeRemaining: 0,
+        validation: 'valid',
     }
 
     updateDisplayNumber = () => {
@@ -86,15 +87,37 @@ export default class Game extends React.Component {
         //get state from API then call this in componentDidMount
     }
 
+    //these need to chain somehow, tried .then and async/await
+    setNumbers = () => {
+        this.updateDisplayNumber()
+        this.updateDrawnNumber()
+    }
+
+    validateWager = (wager) => {
+        let bank = this.props.bank
+        if ((+wager > bank) || (+wager < 0)) {
+            return false
+        } else {
+            return true
+        }
+    }
+
     handleWagerSubmit = (ev) => {
         ev.preventDefault()
-        this.setState({
-            currentComparison: this.state.formSelect,
-            currentWager: this.state.formInput,
-            formInput: 0,
-            formSelect: 'higher'
-        })
-        
+        let validation = this.validateWager(this.state.formInput)
+        if (validation === true) {
+            this.setState({
+                currentComparison: this.state.formSelect,
+                currentWager: this.state.formInput,
+                formInput: 0,
+                formSelect: 'higher',
+                validation: 'valid'
+            })
+        } else {
+          this.setState({
+              validation: 'invalid'
+          }) 
+        }
         
         //somehow reset the form
         //this.form.reset() and HTMLFormElement.reset() both crash
@@ -109,10 +132,11 @@ export default class Game extends React.Component {
 
     handleCompareNumbers = () => {
         if (this.state.currentWager === null) {
-            this.updateDrawnNumber()
-            this.updateDisplayNumber()
+            //to be replaced by server call
+            this.setNumbers()
             this.setState({
-                timeRemaining: 120000
+                timeRemaining: 120000,
+                currentWager: null
             })
         } else if (((this.state.drawnNumber > this.state.displayNumber) && this.state.formSelect === 'higher') || ((this.state.drawnNumber < this.state.displayNumber) && this.state.formSelect === 'lower')) {
             const winnings = (+this.props.bank + +this.state.currentWager)
@@ -121,7 +145,14 @@ export default class Game extends React.Component {
                 outcome: true
             })
             //api call to update server
-            this.updateModal()
+            this.updateModal().then(
+            //to be replaced by server call
+            this.setNumbers(),
+            this.setState({
+                timeRemaining: 120000,
+                currentWager: null
+            })
+          )
         } else {
             const losings = (+this.props.bank - +this.state.currentWager)
             this.props.updateBank(losings)
@@ -129,7 +160,13 @@ export default class Game extends React.Component {
                 outcome: false
             })
             //api call to update server
-            this.updateModal()
+            this.updateModal().then(
+                this.setNumbers(),
+                this.setState({
+                    timeRemaining: 120000,
+                    currentWager: null
+                })
+            )
         }
     }
 
@@ -183,8 +220,7 @@ export default class Game extends React.Component {
     }
 
     componentDidMount() {
-        this.updateDisplayNumber()
-        this.updateDrawnNumber()
+        this.setNumbers()
 
         /*
         //this syntax will be useful after the API is running
@@ -237,6 +273,7 @@ export default class Game extends React.Component {
                             I bet
                         </label>
                         <Input
+                            className={this.state.validation}
                             name='pointwager'
                             id='pointwager'
                             type='number'
