@@ -23,6 +23,18 @@ export default class Game extends React.Component {
         validation: 'valid',
     }
 
+    updateDrawnAndDisplayNumbers = () => {
+        let randNum1 = Math.floor(Math.random()*100)+1
+        let randNum2 = Math.floor(Math.random()*100)+1
+        while (randNum2 === randNum1) {
+            randNum2 = Math.floor(Math.random()*100)+1
+        }
+        this.setState({
+            displayNumber: randNum1,
+            drawnNumber: randNum2
+        })
+    }
+
     updateDisplayNumber = () => {
         let randNum = Math.floor(Math.random()*100)+1
         this.setState({
@@ -87,12 +99,6 @@ export default class Game extends React.Component {
         //get state from API then call this in componentDidMount
     }
 
-    //these need to chain somehow, tried .then and async/await
-    setNumbers = () => {
-        this.updateDisplayNumber()
-        this.updateDrawnNumber()
-    }
-
     validateWager = (wager) => {
         let bank = this.props.bank
         if ((+wager > bank) || (+wager < 0)) {
@@ -118,9 +124,6 @@ export default class Game extends React.Component {
                 validation: 'invalid'
             }) 
         }
-        
-        //somehow reset the form
-        //this.form.reset() and HTMLFormElement.reset() both crash
     }
 
     handleWagerCancel = () => {
@@ -134,7 +137,7 @@ export default class Game extends React.Component {
         if (this.state.currentWager === null) {
             //to be replaced by server call
             let interval = setInterval(this.updateTimeRemaining, 1000)
-            this.setNumbers()
+            this.updateDrawnAndDisplayNumbers()
             this.setState({
                 timeRemaining: 120000,
                 currentWager: null,
@@ -150,7 +153,7 @@ export default class Game extends React.Component {
             this.updateModal()
             //to be replaced by server call
             let interval = setInterval(this.updateTimeRemaining, 1000)
-            this.setNumbers()
+            this.updateDrawnAndDisplayNumbers()
             this.setState({
                 timeRemaining: 120000,
                 currentWager: null,
@@ -166,7 +169,7 @@ export default class Game extends React.Component {
             this.updateModal()
             //to be replaced by server call
             let interval = setInterval(this.updateTimeRemaining, 1000)
-            this.setNumbers()
+            this.updateDrawnAndDisplayNumbers()
             this.setState({
                 timeRemaining: 120000,
                 currentWager: null,
@@ -225,7 +228,7 @@ export default class Game extends React.Component {
     }
 
     componentDidMount() {
-        this.setNumbers()
+        this.updateDrawnAndDisplayNumbers()
 
         /*
         //this syntax will be useful after the API is running
@@ -286,6 +289,7 @@ export default class Game extends React.Component {
                                 type='number'
                                 min='0'
                                 max={bank}
+                                value={this.state.formInput}
                                 onChange={this.updateFormInput}
                                 required
                             >
@@ -297,10 +301,11 @@ export default class Game extends React.Component {
                             <select
                                 name='comparison'
                                 id='comparison'
+                                value={this.state.formSelect}
                                 onChange={this.updateFormSelect}
                             >
                                 <option value ='higher'>higher</option>
-                                <option value = 'lower'>lower</option>
+                                <option value ='lower'>lower</option>
                             </select>
                         </div>
                         <div className='wagerbuttons'>
