@@ -13,10 +13,11 @@ import NotFound from '../../routes/NotFound/NotFoundRoute';
 class App extends React.Component {
 
   state = {
-    bank: 100,
+    bank: 0,
     hasError: false,
     loggedIn: false,
-    user: 'test',
+    user: '',
+    userId: 0
   }
 
   updateBank = (num) => {
@@ -43,6 +44,14 @@ class App extends React.Component {
     })
   }
 
+  updateUserId = (id) => {
+    this.setState({
+      userId: id
+    })
+  }
+
+  //setuserinfo using a get request by ID
+
   render() {
 
     return (
@@ -62,12 +71,12 @@ class App extends React.Component {
 
             <PublicOnlyRoute
              path={'/login'}
-             render={(routeProps) => (<Login {...routeProps} updateUser={this.updateUser} updateLoggedIn={this.updateLoggedIn}/>)}
+             render={(routeProps) => (<Login {...routeProps} updateUserId={this.updateUserId} updateLoggedIn={this.updateLoggedIn}/>)}
             />
 
             <PublicOnlyRoute
              path={'/signup'}
-             render={(routeProps) => (<SignUp {...routeProps} updateUser={this.updateUser} updateLoggedIn={this.updateLoggedIn}/>)}
+             render={(routeProps) => (<SignUp {...routeProps} updateUserId={this.updateUserId} updateLoggedIn={this.updateLoggedIn}/>)}
             />
 
             <PrivateOnlyRoute

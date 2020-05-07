@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthApiService from '../../services/auth-api-service';
+import UserApiService from '../../services/user-api-service';
 import TokenService from '../../services/token-service';
 import { Button, Input } from '../Utils/Utils';
 import './Login.css'
@@ -26,36 +27,32 @@ export default class Login extends React.Component {
             password: ev.target.value
         })
     }
+    
+    //somehow this has to make a GET request for the specific user but how to get the id?
 
-    handleFakeSubmit = (ev) => {
-        ev.preventDefault()
+    handleSubmitJwtAuth = ev => {
+    ev.preventDefault()
+    this.setState({ error: null })
+    const { username, password } = this.state
+
+    AuthApiService.postLogin({
+        username: username.value,
+        password: password.value,
+    })
+        .then(res => {
+        username.value = ''
+        password.value = ''
+        TokenService.saveAuthToken(res.authToken)
+        })
+        .then(user => {
         this.props.updateUser(this.state.username)
         this.props.updateLoggedIn()
         this.props.onLoginSuccess()
+        })
+        .catch(res => {
+        this.setState({ error: res.error })
+        })
     }
-
-    
-       handleSubmitJwtAuth = ev => {
-       ev.preventDefault()
-       this.setState({ error: null })
-       const { username, password } = this.state
-    
-       AuthApiService.postLogin({
-         username: username.value,
-         password: password.value,
-       })
-         .then(res => {
-           username.value = ''
-           password.value = ''
-           TokenService.saveAuthToken(res.authToken)
-           this.props.updateUser(this.state.username)
-           this.props.updateLoggedIn()
-           this.props.onLoginSuccess()
-         })
-         .catch(res => {
-           this.setState({ error: res.error })
-         })
-   }
 
 
     render() {

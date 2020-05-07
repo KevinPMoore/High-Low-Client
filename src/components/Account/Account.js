@@ -6,6 +6,7 @@ export default class Account extends React.Component {
     state = {
         username: '',
         topUp: 'hidden',
+        delete: 'hidden',
     }
 
     updateTopUp = () => {
@@ -16,6 +17,18 @@ export default class Account extends React.Component {
         } else {
             this.setState({
                 topUp: 'hidden'
+            })
+        }
+    }
+
+    updateDelete = () => {
+        if (this.state.delete === 'hidden') {
+            this.setState({
+                delete: 'modal'
+            })
+        } else {
+            this.setState({
+                delete: 'hidden'
             })
         }
     }
