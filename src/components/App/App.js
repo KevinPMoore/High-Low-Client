@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import PrivateOnlyRoute from '../Utils/PrivateRoute';
+import PublicOnlyRoute from '../Utils/PublicRoute';
 import Header from '../Header/Header';
 import Home from '../../routes/Home/HomeRoute';
 import Login from '../../routes/Login/LoginRoute';
@@ -58,26 +60,22 @@ class App extends React.Component {
               component={Home}
             />
 
-            <Route
-             /*MAKE PUBLIC ONLY*/
+            <PublicOnlyRoute
              path={'/login'}
              render={(routeProps) => (<Login {...routeProps} updateUser={this.updateUser} updateLoggedIn={this.updateLoggedIn}/>)}
             />
 
-            <Route
-             /*MAKE PUBLIC ONLY*/
+            <PublicOnlyRoute
              path={'/signup'}
              render={(routeProps) => (<SignUp {...routeProps} updateUser={this.updateUser} updateLoggedIn={this.updateLoggedIn}/>)}
             />
 
-            <Route
-             /*MAKE PRIVATE ONLY*/
+            <PrivateOnlyRoute
              path={'/game'}
              render={(routeProps) => (<Game {...routeProps} bank={this.state.bank} updateBank={this.updateBank}/>)}
             />
 
-            <Route
-             /*MAKE PRIVATE ONLY*/
+            <PrivateOnlyRoute
              path={'/account'}
              render={(routeProps) => (<Account {...routeProps} bank={this.state.bank} user={this.state.user} updateBank={this.updateBank}/>)}
             />

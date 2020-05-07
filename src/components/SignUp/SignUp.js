@@ -1,4 +1,5 @@
 import React from 'react';
+import AuthApiService from '../../services/auth-api-service';
 import { Button, Input, Required } from '../Utils/Utils';
 import './SignUp.css';
 
@@ -9,7 +10,8 @@ export default class SignUp extends React.Component {
 
     state = { 
         error: null,
-        username: ''
+        username: '',
+        password: ''
     }
 
     updateUsername = (ev) => {
@@ -18,37 +20,33 @@ export default class SignUp extends React.Component {
         })
     }
 
-    handleFakeSubmit = (ev) => {
-        ev.preventDefault()
-        this.props.updateUser(this.state.username)
-        this.props.updateLoggedIn()
-        this.props.onSignUpSuccess()
+    updatePassword = (ev) => {
+        this.setState({
+            password: ev.target.value
+        })
     }
-
-    /* 
+    
     handleSubmit = ev => {
         ev.preventDefault()
-        const { full_name, nick_name, user_name, password } = ev.target
+        const { username, password } = this.state
 
         this.setState({ error: null })
         AuthApiService.postUser({
-        user_name: user_name.value,
+        username: username.value,
         password: password.value,
-        full_name: full_name.value,
-        nick_name: nick_name.value,
         })
         .then(user => {
-        full_name.value = ''
-        nick_name.value = ''
-        user_name.value = ''
+        username.value = ''
         password.value = ''
-        this.props.onRegistrationSuccess()
+        this.props.updateUser(this.state.username)
+        this.props.updateLoggedIn()
+        this.props.onSignUpSuccess()
         })
         .catch(res => {
         this.setState({ error: res.error })
         })
     }
-    */
+    
 
 
     render() {
@@ -56,9 +54,8 @@ export default class SignUp extends React.Component {
         return (
             <form
                 className='signup_form'
-                onSubmit={this.handleFakeSubmit}
+                onSubmit={this.handleSubmit}
             >
-                {/*onSubmit={this.handleSubmit}*/}
                 <div className='alert'>
                     {error && <p className='red'>{error}</p>}
                 </div>
@@ -86,6 +83,7 @@ export default class SignUp extends React.Component {
                         id='signup_password'
                         placeholder='V3ryS3cr1t!'
                         required
+                        onChange={this.updatePassword}
                     >
                     </Input>
                 </div>

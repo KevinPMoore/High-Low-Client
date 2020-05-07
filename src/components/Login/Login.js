@@ -1,4 +1,6 @@
 import React from 'react';
+import AuthApiService from '../../services/auth-api-service';
+import TokenService from '../../services/token-service';
 import { Button, Input } from '../Utils/Utils';
 import './Login.css'
 
@@ -10,11 +12,18 @@ export default class Login extends React.Component {
     state = {
         error: null,
         username: '',
+        password: ''
     }
 
     updateUsername = (ev) => {
         this.setState({
             username: ev.target.value
+        })
+    }
+
+    updatePassword = (ev) => {
+        this.setState({
+            password: ev.target.value
         })
     }
 
@@ -25,36 +34,37 @@ export default class Login extends React.Component {
         this.props.onLoginSuccess()
     }
 
-    /* 
+    
        handleSubmitJwtAuth = ev => {
        ev.preventDefault()
        this.setState({ error: null })
-       const { user_name, password } = ev.target
+       const { username, password } = this.state
     
        AuthApiService.postLogin({
-         user_name: user_name.value,
+         username: username.value,
          password: password.value,
        })
          .then(res => {
-           user_name.value = ''
+           username.value = ''
            password.value = ''
            TokenService.saveAuthToken(res.authToken)
+           this.props.updateUser(this.state.username)
+           this.props.updateLoggedIn()
            this.props.onLoginSuccess()
          })
          .catch(res => {
            this.setState({ error: res.error })
          })
    }
-    */
+
 
     render() {
         const { error } = this.state
         return (
             <form
                 className='loginform'
-                onSubmit={this.handleFakeSubmit}
+                onSubmit={this.handleSubmitJwtAuth}
             >
-                {/*onSubmit={this.handleSubmitJwtAuth}*/}
                 <div className='alert'>
                     {error && <p className='red'>{error}</p>}
                 </div>
@@ -81,6 +91,7 @@ export default class Login extends React.Component {
                         id='login_password'
                         placeholder='V3ryS3cr1t!'
                         required
+                        onChange={this.updatePassword}
                     >
                     </Input>
                 </div>
