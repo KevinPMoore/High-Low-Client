@@ -3,11 +3,6 @@ import { Input, Button } from '../Utils/Utils';
 import './Game.css';
 
 export default class Game extends React.Component {
-    /*ToDos
-        handle submit wager form resets fields
-        setstate so after comparison drawnNumber becomes displayNumber and then drawnNumber is re-randomized
-        remove comments from functions
-    */
     state = {
         currentWager: null,
         currentComparison: '',
@@ -94,11 +89,6 @@ export default class Game extends React.Component {
         })
     }
 
-    //with API later
-    setInitialState = () => {
-        //get state from API then call this in componentDidMount
-    }
-
     validateWager = (wager) => {
         let bank = this.props.bank
         if ((+wager > bank) || (+wager < 0)) {
@@ -135,11 +125,10 @@ export default class Game extends React.Component {
 
     handleCompareNumbers = () => {
         if (this.state.currentWager === null) {
-            //to be replaced by server call
             let interval = setInterval(this.updateTimeRemaining, 1000)
             this.updateDrawnAndDisplayNumbers()
             this.setState({
-                timeRemaining: 120000,
+                timeRemaining: 60000,
                 currentWager: null,
                 interval: interval
             })
@@ -149,13 +138,11 @@ export default class Game extends React.Component {
             this.setState({
                 outcome: true
             })
-            //api call to update server
             this.updateModal()
-            //to be replaced by server call
             let interval = setInterval(this.updateTimeRemaining, 1000)
             this.updateDrawnAndDisplayNumbers()
             this.setState({
-                timeRemaining: 120000,
+                timeRemaining: 60000,
                 currentWager: null,
                 interval: interval
             })
@@ -165,13 +152,11 @@ export default class Game extends React.Component {
             this.setState({
                 outcome: false
             })
-            //api call to update server
             this.updateModal()
-            //to be replaced by server call
             let interval = setInterval(this.updateTimeRemaining, 1000)
             this.updateDrawnAndDisplayNumbers()
             this.setState({
-                timeRemaining: 120000,
+                timeRemaining: 60000,
                 currentWager: null,
                 interval: interval
             })
@@ -230,19 +215,9 @@ export default class Game extends React.Component {
     componentDidMount() {
         this.updateDrawnAndDisplayNumbers()
 
-        /*
-        //this syntax will be useful after the API is running
-        // get the data with the event date 
-        const mockTime = new Date(Date.UTC(2020, 4, 1, 12, 0, 0))
-        // get the local time, subtract from the event date and set state with the remaining time
-        //convert this to tocal timezone of browser
-        const currentTime = new Date();
-        */
-
         let interval = setInterval(this.updateTimeRemaining, 1000)
     
-        //this is for testing client side only and will be replaced with API call later
-        const timeRemaining = 120000;
+        const timeRemaining = 60000;
         this.setState({
           timeRemaining,
           interval

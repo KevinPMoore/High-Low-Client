@@ -28,3 +28,15 @@
     cursor: pointer;
   }
   
+  .cancel_delete {
+    color: #aaaaaa;
+    font-size: 18px;
+    margin-left: 10%;
+  }
+
+  .cancel_delete:hover,
+  .cancel_delete:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }

@@ -1,4 +1,5 @@
 import React from 'react';
+import UserApiService from '../../services/user-api-service'
 import { Route, Switch } from 'react-router-dom';
 import PrivateOnlyRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicRoute';
@@ -19,10 +20,18 @@ class App extends React.Component {
     userId: 0
   }
 
+  setInitialState = () => {
+    //setuserinfo using a get request by ID
+  }
+
   updateBank = (num) => {
-    this.setState({
-        bank: num
-    })
+    const id = this.state.userId
+    UserApiService.patchUser(id, num)
+    .then(
+      this.setState({
+          bank: num
+      })
+    )
   }
 
   updateHasError = () => {
@@ -43,8 +52,6 @@ class App extends React.Component {
     })
   }
 
-  //setuserinfo using a get request by ID
-
   render() {
 
     return (
@@ -64,22 +71,26 @@ class App extends React.Component {
 
             <PublicOnlyRoute
              path={'/login'}
-             render={(routeProps) => (<Login {...routeProps} updateUserId={this.updateUserId} updateLoggedIn={this.updateLoggedIn}/>)}
+             component={Login}
+             //render={(routeProps) => (<Login {...routeProps} updateUserId={this.updateUserId} updateLoggedIn={this.updateLoggedIn}/>)}
             />
 
             <PublicOnlyRoute
              path={'/signup'}
-             render={(routeProps) => (<SignUp {...routeProps} updateUserId={this.updateUserId} updateLoggedIn={this.updateLoggedIn}/>)}
+             component={SignUp}
+             //render={(routeProps) => (<SignUp {...routeProps} updateUserId={this.updateUserId} updateLoggedIn={this.updateLoggedIn}/>)}
             />
 
             <PrivateOnlyRoute
              path={'/game'}
-             render={(routeProps) => (<Game {...routeProps} bank={this.state.bank} updateBank={this.updateBank}/>)}
+             component={Game}
+             //render={(routeProps) => (<Game {...routeProps} bank={this.state.bank} updateBank={this.updateBank}/>)}
             />
 
             <PrivateOnlyRoute
              path={'/account'}
-             render={(routeProps) => (<Account {...routeProps} bank={this.state.bank} user={this.state.user} updateBank={this.updateBank}/>)}
+             component={Account}
+             //render={(routeProps) => (<Account {...routeProps} bank={this.state.bank} user={this.state.user} userId={this.state.userId} updateBank={this.updateBank}/>)}
             />
 
             <Route
