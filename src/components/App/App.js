@@ -15,7 +15,6 @@ class App extends React.Component {
   state = {
     bank: 0,
     hasError: false,
-    loggedIn: false,
     user: '',
     userId: 0
   }
@@ -29,12 +28,6 @@ class App extends React.Component {
   updateHasError = () => {
     this.setState({
       hasError: !this.state.hasError
-    })
-  }
-
-  updateLoggedIn = () => {
-    this.setState({
-      loggedIn: !this.state.loggedIn
     })
   }
 
@@ -57,7 +50,7 @@ class App extends React.Component {
     return (
       <div className='App'>
         <header className='App_header'>
-          <Header loggedIn={this.state.loggedIn} updateLoggedIn={this.updateLoggedIn}/>
+          <Header />
         </header>
         <main className='App_main'>
           {this.state.hasError && <p className='Error_text'>An error occured, please try again.</p>}

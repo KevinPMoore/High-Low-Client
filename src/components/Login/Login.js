@@ -27,6 +27,16 @@ export default class Login extends React.Component {
             password: ev.target.value
         })
     }
+
+    getIdByUsername = (name) => {
+        UserApiService.getUsers()
+        .then(res => res.filter(users =>
+            users.username = name    
+        ))
+        .then(user => {
+            return user.id
+        })
+    }
     
     //somehow this has to make a GET request for the specific user but how to get the id?
 
@@ -45,7 +55,7 @@ export default class Login extends React.Component {
         TokenService.saveAuthToken(res.authToken)
         })
         .then(user => {
-        this.props.updateUser(this.state.username)
+        //this.props.updateUserId(id)
         this.props.updateLoggedIn()
         this.props.onLoginSuccess()
         })

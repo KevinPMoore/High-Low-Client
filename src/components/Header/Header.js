@@ -1,4 +1,5 @@
 import React from 'react';
+import TokenService from '../../services/token-service';
 import { Link } from 'react-router-dom';
 import { Button } from '../Utils/Utils';
 import './Header.css';
@@ -11,7 +12,7 @@ export default class Header extends React.Component {
     */
 
     handleLogoutClick = () => {
-        //clear auth token
+        TokenService.clearAuthToken()
     }
 
     renderLogout() {
@@ -28,7 +29,7 @@ export default class Header extends React.Component {
                     </Button>
                 </Link>
                 <Link
-                    onClick={this.props.updateLoggedIn}
+                    onClick={this.handleLogoutClick}
                     to='/'
                 >
                     <Button className='navbutton'>
