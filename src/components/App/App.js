@@ -20,8 +20,15 @@ class App extends React.Component {
     userId: 0
   }
 
-  setInitialState = () => {
-    //setuserinfo using a get request by ID
+  setInitialState = (id) => {
+    UserApiService.getUserById(id)
+    .then(res =>
+      this.setState({
+        bank: res.bank,
+        user: res.username,
+        userId: res.id
+      })
+    )
   }
 
   updateBank = (num) => {
@@ -37,18 +44,6 @@ class App extends React.Component {
   updateHasError = () => {
     this.setState({
       hasError: !this.state.hasError
-    })
-  }
-
-  updateUser = (name) => {
-    this.setState({
-      user: name
-    })
-  }
-
-  updateUserId = (id) => {
-    this.setState({
-      userId: id
     })
   }
 
@@ -72,13 +67,13 @@ class App extends React.Component {
             <PublicOnlyRoute
              path={'/login'}
              component={Login}
-             //render={(routeProps) => (<Login {...routeProps} updateUserId={this.updateUserId} updateLoggedIn={this.updateLoggedIn}/>)}
+             //render={(routeProps) => (<Login {...routeProps} setUser={this.setInitialState}/>)}
             />
 
             <PublicOnlyRoute
              path={'/signup'}
              component={SignUp}
-             //render={(routeProps) => (<SignUp {...routeProps} updateUserId={this.updateUserId} updateLoggedIn={this.updateLoggedIn}/>)}
+             //render={(routeProps) => (<SignUp {...routeProps} setUser={this.setInitialState}/>)}
             />
 
             <PrivateOnlyRoute

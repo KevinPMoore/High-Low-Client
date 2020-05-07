@@ -31,7 +31,7 @@ export default class Login extends React.Component {
     getIdByUsername = (name) => {
         UserApiService.getUsers()
         .then(res => res.filter(users =>
-            users.username = name    
+            users.username === name    
         ))
         .then(user => {
             return user.id
@@ -55,8 +55,7 @@ export default class Login extends React.Component {
         TokenService.saveAuthToken(res.authToken)
         })
         .then(user => {
-        //this.props.updateUserId(id)
-        this.props.updateLoggedIn()
+        this.props.setUser()
         this.props.onLoginSuccess()
         })
         .catch(res => {

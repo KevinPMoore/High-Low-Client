@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthApiService from '../../services/auth-api-service';
+import UserApiService from '../../services/user-api-service';
 import { Button, Input, Required } from '../Utils/Utils';
 import './SignUp.css';
 
@@ -25,6 +26,16 @@ export default class SignUp extends React.Component {
             password: ev.target.value
         })
     }
+
+    getIdByUsername = (name) => {
+        UserApiService.getUsers()
+        .then(res => res.filter(users =>
+            users.username === name    
+        ))
+        .then(user => {
+            return user.id
+        })
+    }
     
     handleSubmit = ev => {
         ev.preventDefault()
@@ -32,18 +43,21 @@ export default class SignUp extends React.Component {
 
         this.setState({ error: null })
         AuthApiService.postUser({
-        username: username.value,
-        password: password.value,
+            username: username.value,
+            password: password.value,
         })
+        .then(
+            this.getIdByUsername(username)
+        )
+        .then(id => 
+            this.props.setInitialState(id)    
+        )
         .then(user => {
-        username.value = ''
-        password.value = ''
-        this.props.updateUser(this.state.username)
-        this.props.updateLoggedIn()
-        this.props.onSignUpSuccess()
+            username.value = ''
+            password.value = ''
         })
         .catch(res => {
-        this.setState({ error: res.error })
+            this.setState({ error: res.error })
         })
     }
     

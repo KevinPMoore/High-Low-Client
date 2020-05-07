@@ -22,8 +22,7 @@ export default class LoginRoute extends React.Component {
                 <h2>Log In</h2>
                 <Login
                   onLoginSuccess={this.handleLoginSuccess}
-                  updateUserId={this.props.updateUserId}
-                  updateLoggedIn={this.props.updateLoggedIn}
+                  setUser={this.props.setUser}
                 />
             </Section>
         )

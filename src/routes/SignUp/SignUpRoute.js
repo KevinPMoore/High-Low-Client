@@ -20,8 +20,7 @@ export default class SignUpRoute extends React.Component {
                 <h2>Sign Up</h2>
                 <SignUp
                   onSignUpSuccess={this.handleSignUpSuccess}
-                  updateUser={this.props.updateUser}
-                  updateLoggedIn={this.props.updateLoggedIn}
+                  setUser={this.props.setUser}
                 />
             </Section>
         )
