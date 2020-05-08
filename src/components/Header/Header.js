@@ -74,7 +74,7 @@ export default class Header extends React.Component {
                     </h1>
                     <span className='tagline'>Test your luck</span>
                 </div>
-                {this.props.loggedIn === true ? this.renderLogout() : this.renderLogin()}
+                {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}
             </nav>
         )
     }

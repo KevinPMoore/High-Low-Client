@@ -1,6 +1,5 @@
 import React from 'react';
 import AuthApiService from '../../services/auth-api-service';
-import UserApiService from '../../services/user-api-service';
 import { Button, Input, Required } from '../Utils/Utils';
 import './SignUp.css';
 
@@ -24,16 +23,6 @@ export default class SignUp extends React.Component {
     updatePassword = (ev) => {
         this.setState({
             password: ev.target.value
-        })
-    }
-
-    getIdByUsername = (name) => {
-        UserApiService.getUsers()
-        .then(res => res.filter(users =>
-            users.username === name    
-        ))
-        .then(user => {
-            return user.id
         })
     }
     

@@ -20,15 +20,13 @@ class App extends React.Component {
     userId: 0
   }
 
-  setInitialState = (id) => {
-    UserApiService.getUserById(id)
-    .then(res =>
+  setInitialState = ({bank, user_name, id}) => {
+    console.log(bank , user_name, id)
       this.setState({
-        bank: res.bank,
-        user: res.username,
-        userId: res.id
+        bank: bank,
+        user: user_name,
+        userId: id
       })
-    )
   }
 
   updateBank = (num) => {
@@ -67,25 +65,25 @@ class App extends React.Component {
             <PublicOnlyRoute
              path={'/login'}
              component={Login}
-             //render={(routeProps) => (<Login {...routeProps} setUser={this.setInitialState}/>)}
+             render={(routeProps) => (<Login {...routeProps} setUser={this.setInitialState}/>)}
             />
 
             <PublicOnlyRoute
              path={'/signup'}
              component={SignUp}
-             //render={(routeProps) => (<SignUp {...routeProps} setUser={this.setInitialState}/>)}
+             render={(routeProps) => (<SignUp {...routeProps} setUser={this.setInitialState}/>)}
             />
 
             <PrivateOnlyRoute
              path={'/game'}
              component={Game}
-             //render={(routeProps) => (<Game {...routeProps} bank={this.state.bank} updateBank={this.updateBank}/>)}
+             render={(routeProps) => (<Game {...routeProps} bank={this.state.bank} updateBank={this.updateBank}/>)}
             />
 
             <PrivateOnlyRoute
              path={'/account'}
              component={Account}
-             //render={(routeProps) => (<Account {...routeProps} bank={this.state.bank} user={this.state.user} userId={this.state.userId} updateBank={this.updateBank}/>)}
+             render={(routeProps) => (<Account {...routeProps} bank={this.state.bank} user={this.state.user} userId={this.state.userId} updateBank={this.updateBank}/>)}
             />
 
             <Route
