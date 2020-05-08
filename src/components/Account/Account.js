@@ -1,5 +1,6 @@
 import React from 'react';
 import UserApiService from '../../services/user-api-service';
+import TokenService from '../../services/token-service';
 import { Button } from '../Utils/Utils';
 import './Account.css';
 
@@ -43,6 +44,7 @@ export default class Account extends React.Component {
     deleteAccount = (id) => {
         UserApiService.deleteUser(id)
         this.updateDelete()
+        TokenService.clearAuthToken()
     }
 
     componentDidMount() {
