@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthApiService from '../../services/auth-api-service';
+import TokenService from '../../services/token-service';
 import { Button, Input, Required } from '../Utils/Utils';
 import './SignUp.css';
 
@@ -36,6 +37,10 @@ export default class SignUp extends React.Component {
             password: password
         })
         .then(user => {
+            TokenService.saveAuthToken(user)
+            return user
+        })
+        .then(user => {
             this.props.setUser(user)
             this.props.onSignUpSuccess()
         })
@@ -44,8 +49,6 @@ export default class SignUp extends React.Component {
         })
     }
     
-
-
     render() {
         const { error } = this.state
         return (
