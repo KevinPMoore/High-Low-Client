@@ -28,22 +28,16 @@ export default class SignUp extends React.Component {
     
     handleSubmit = ev => {
         ev.preventDefault()
+        this.setState({ error: null })
         const { username, password } = this.state
 
-        this.setState({ error: null })
         AuthApiService.postUser({
-            username: username.value,
-            password: password.value,
+            user_name: username,
+            password: password
         })
-        .then(
-            this.getIdByUsername(username)
-        )
-        .then(id => 
-            this.props.setInitialState(id)    
-        )
         .then(user => {
-            username.value = ''
-            password.value = ''
+            this.props.setUser(user)
+            this.props.onSignUpSuccess()
         })
         .catch(res => {
             this.setState({ error: res.error })

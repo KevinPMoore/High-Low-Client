@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   setInitialState = ({bank, user_name, id}) => {
-    console.log(bank , user_name, id)
+    console.log('set initial state ran with', bank , user_name, id)
       this.setState({
         bank: bank,
         user: user_name,
@@ -65,13 +65,13 @@ class App extends React.Component {
             <PublicOnlyRoute
              path={'/login'}
              component={Login}
-             render={(routeProps) => (<Login {...routeProps} setUser={this.setInitialState}/>)}
+             setUser={this.setInitialState}
             />
 
             <PublicOnlyRoute
              path={'/signup'}
              component={SignUp}
-             render={(routeProps) => (<SignUp {...routeProps} setUser={this.setInitialState}/>)}
+             setUser={this.setInitialState}
             />
 
             <PrivateOnlyRoute

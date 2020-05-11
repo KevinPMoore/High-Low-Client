@@ -28,27 +28,24 @@ export default class Login extends React.Component {
     }
 
     handleSubmitJwtAuth = ev => {
-    ev.preventDefault()
-    this.setState({ error: null })
-    const { username, password } = this.state
-    console.log(username , password)
+        ev.preventDefault()
+        this.setState({ error: null })
+        const { username, password } = this.state
 
-    AuthApiService.postLogin({
-        user_name: username,
-        password: password
-    })
+        AuthApiService.postLogin({
+            user_name: username,
+            password: password
+        })
         .then(res => {
-            console.log(res)
-        TokenService.saveAuthToken(res.authToken)
-        return res.user
+            TokenService.saveAuthToken(res.authToken)
+            return res.user
         })
         .then(user => {
-            console.log(user)
-        this.props.setUser(user)
-        this.props.onLoginSuccess()
+            this.props.setUser(user)
+            this.props.onLoginSuccess()
         })
         .catch(res => {
-        this.setState({ error: res.error })
+            this.setState({ error: res.error })
         })
     }
 

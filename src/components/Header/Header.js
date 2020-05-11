@@ -5,11 +5,6 @@ import { Button } from '../Utils/Utils';
 import './Header.css';
 
 export default class Header extends React.Component {
-    /*
-      ToDo
-        actual auth logout
-        change link on the h1 to not go to '/' if logged in  
-    */
 
     handleLogoutClick = () => {
         TokenService.clearAuthToken()
