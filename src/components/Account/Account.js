@@ -6,8 +6,6 @@ import './Account.css';
 
 export default class Account extends React.Component {
     state = {
-        username: '',
-        id: null,
         topUp: 'hidden',
         delete: 'hidden',
     }
@@ -41,22 +39,16 @@ export default class Account extends React.Component {
         this.updateTopUp()
     }
 
-    deleteAccount = (id) => {
+    deleteAccount = () => {
+        const id = this.props.userId
         UserApiService.deleteUser(id)
         this.updateDelete()
-        TokenService.clearAuthToken()
-    }
-
-    componentDidMount() {
-        this.setState({
-            username: this.props.user
-        })
+        //TokenService.clearAuthToken()
     }
 
     render() {
         const bank = this.props.bank
-        const user = this.state.username
-        const id = this.state.id
+        const user = this.props.user
         return (
             <div className='user_info'>
                 <p>User name: <span>{user}</span></p>
@@ -83,8 +75,8 @@ export default class Account extends React.Component {
                 <div className={this.state.delete}>
                     <div className='modal_content'>
                         <p>This will delete your account.  This is permanent and cannot be undone.  Are you sure?</p>
-                        <Button className='confirm' onClick={this.resetPoints}>Confirm</Button>
-                        <Button className='cancel_delete' onClick={this.deleteAccount(id)}>Cancel</Button>
+                        <Button className='confirm' onClick={this.deleteAccount}>Confirm</Button>
+                        <Button className='cancel_delete' onClick={this.updateDelete}>Cancel</Button>
                     </div>
                 </div>
             </div>

@@ -20,13 +20,15 @@ const HighLowUserService = {
                 (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json()
             )
     },
-    patchUser(id, bank) {
+    patchUser(id, user_name, bank) {
         return fetch(`${config.API_ENDPOINT}/users/${id}`, {
             method: 'PATCH',
             headers: {
-                'content-type': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
             },
             body: JSON.stringify({
+                user_name,
                 bank
             })
         })
@@ -34,6 +36,9 @@ const HighLowUserService = {
     deleteUser(id) {
         return fetch(`${config.API_ENDPOINT}/users/${id}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+            }
         })
     }
 }

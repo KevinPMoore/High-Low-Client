@@ -21,7 +21,6 @@ class App extends React.Component {
   }
 
   setInitialState = ({bank, user_name, id}) => {
-    console.log('set initial state ran with', bank , user_name, id)
       this.setState({
         bank: bank,
         user: user_name,
@@ -31,7 +30,8 @@ class App extends React.Component {
 
   updateBank = (num) => {
     const id = this.state.userId
-    UserApiService.patchUser(id, num)
+    const user = this.state.user
+    UserApiService.patchUser(id, user, num)
     .then(
       this.setState({
           bank: num
@@ -77,13 +77,17 @@ class App extends React.Component {
             <PrivateOnlyRoute
              path={'/game'}
              component={Game}
-             render={(routeProps) => (<Game {...routeProps} bank={this.state.bank} updateBank={this.updateBank}/>)}
+             bank={this.state.bank} 
+             updateBank={this.updateBank}
             />
 
             <PrivateOnlyRoute
              path={'/account'}
              component={Account}
-             render={(routeProps) => (<Account {...routeProps} bank={this.state.bank} user={this.state.user} userId={this.state.userId} updateBank={this.updateBank}/>)}
+             bank={this.state.bank} 
+             user={this.state.user} 
+             userId={this.state.userId} 
+             updateBank={this.updateBank}
             />
 
             <Route
