@@ -19,7 +19,7 @@ export default class AccountRoute extends React.Component {
     render() {
         return (
             <Section className='AccountRoute'>
-                <Account bank={this.props.bank} user={this.props.user} userId={this.props.userId} updateBank={this.props.updateBank} handleDeleteSuccess={this.handleDeleteSuccess}/>
+                <Account bank={this.props.bank} user={this.props.user} userId={this.props.userId} updateBank={this.props.updateBank} updateLoggedIn={this.props.updateLoggedIn} handleDeleteSuccess={this.handleDeleteSuccess}/>
             </Section>
         ) 
     }

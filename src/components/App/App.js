@@ -16,6 +16,7 @@ class App extends React.Component {
   state = {
     bank: 0,
     hasError: false,
+    loggedIn: false,
     user: '',
     userId: 0
   }
@@ -45,12 +46,21 @@ class App extends React.Component {
     })
   }
 
+  updateLoggedIn = () => {
+    this.setState({
+      loggedIn: !this.state.loggedIn
+    })
+  }
+
   render() {
 
     return (
       <div className='App'>
         <header className='App_header'>
-          <Header />
+          <Header 
+            loggedIn={this.state.loggedIn}
+            updateLoggedIn={this.updateLoggedIn}
+          />
         </header>
         <main className='App_main'>
           {this.state.hasError && <p className='Error_text'>An error occured, please try again.</p>}
@@ -88,6 +98,7 @@ class App extends React.Component {
              user={this.state.user} 
              userId={this.state.userId} 
              updateBank={this.updateBank}
+             updateLoggedIn={this.updateLoggedIn}
             />
 
             <Route
