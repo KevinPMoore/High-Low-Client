@@ -43,7 +43,8 @@ export default class Account extends React.Component {
         const id = this.props.userId
         UserApiService.deleteUser(id)
         this.updateDelete()
-        //TokenService.clearAuthToken()
+        this.props.handleDeleteSuccess()
+        TokenService.clearAuthToken()
     }
 
     render() {

@@ -20,19 +20,24 @@ export default class Header extends React.Component {
     renderLogout() {
         return (
             <div className='loggedin'>
-                <Link to='/game'>
+                <Link 
+                    className='gamelink'
+                    to='/game'>
                     <Button className='navbutton'>
                         Game
                     </Button>
                 </Link>
-                <Link to='/account'>
+                <Link 
+                    className='accountlink'
+                    to='/account'>
                     <Button className='navbutton'>
                         Account
                     </Button>
                 </Link>
                 <Link
-                    onClick={this.handleLogoutClick}
+                    className='logoutlink'
                     to='/'
+                    onClick={this.handleLogoutClick}
                 >
                     <Button className='navbutton'>
                         Logout

@@ -21,12 +21,19 @@ nav {
     justify-content: space-evenly;
 }
 
-.loginlink {
+.loginlink .signuplink {
     max-height: 30px;
+    max-width: 70px;
+}
+
+.gamelink .accountlink .logoutlink {
+    max-height: 30px;
+    max-width: 70px;
 }
 
 .navbutton {
     min-height: 30px;
+    min-width: 70px;
     max-height: 50px;
     margin-left: 8px;
     margin-right: 8px;
