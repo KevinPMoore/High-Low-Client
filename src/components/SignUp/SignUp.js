@@ -36,10 +36,11 @@ export default class SignUp extends React.Component {
             user_name: username,
             password: password
         })
+        //this is where its breaking, coming back 400
         .then(user => {
             AuthApiService.postLogin({
-                user_name: user.user_name,
-                password: user.password
+                user_name: username,
+                password: password
             })
         })
         .then(res => {
