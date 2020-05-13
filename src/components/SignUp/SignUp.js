@@ -36,15 +36,9 @@ export default class SignUp extends React.Component {
             user_name: username,
             password: password
         })
-        .then(login => {
-            AuthApiService.postLogin({
-                user_name: username,
-                password: password
-            })
-        })
-        .then(res => {
-            TokenService.saveAuthToken(res.authToken)
-            return res.user
+        .then(user => {
+            TokenService.saveAuthToken(user)
+            return user
         })
         .then(user => {
             this.props.setUser(user)
