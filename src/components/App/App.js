@@ -22,7 +22,6 @@ class App extends React.Component {
   }
 
   setInitialState = ({bank, user_name, id}) => {
-    console.log('setUser ran')
       this.setState({
         bank: bank,
         user: user_name,
