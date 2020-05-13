@@ -8,4 +8,4 @@ it('renders without crashing', () => {
     renderer.render(<Header/>);
 })
 
-//add snapshot tests for logged out and logged in
+//add snapshot tests for logged out and logged in after styling
