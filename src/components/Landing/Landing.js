@@ -10,7 +10,7 @@ export default class Landing extends React.Component {
                     <h3>Easy to learn</h3>
                     <div className='left placeholder'>Placeholder for number/countdown screenshot</div>
                     <p className='landing_paragraph'>
-                    High-Low generates a random number for you between 1 and 100.  All you have to do is guess if the next number it generates will be higher or lower!  You have 3 minutes to decide.
+                    High-Low generates a random number for you between 1 and 100.  All you have to do is guess if the next number it generates will be higher or lower!  You have one minute to decide.
                     </p>
                 </section>
                 <section className='landing_section'>
