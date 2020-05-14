@@ -1,3 +1,48 @@
 .LoginRoute {
+    height: 100vh;
     margin-top: 90px;
+    background-color: #FF879B;
+    display: flex;
+    justify-content: center;
+}
+
+.loginform {
+    min-width: 50%;
+    max-width: 80%;
+    min-height: 180px;
+    max-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: #73D2FA;
+}
+
+.user_name {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#login_user_name {
+    min-width: 100px;
+    max-width: 200px;
+}
+
+#login_password {
+    min-width: 100px;
+    max-width: 200px;
+}
+
+#login_submit {
+    margin: auto;
+    max-height: 30px;
+    max-width: 70px;
+}
+
+.password {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
 }

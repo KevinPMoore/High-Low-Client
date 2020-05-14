@@ -20,6 +20,10 @@ img {
     width: 64px;
 }
 
+img:hover {
+    cursor: pointer;
+}
+
 .buttonscontainer {
     display: flex;
     flex-direction: column;

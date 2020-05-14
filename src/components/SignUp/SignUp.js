@@ -94,6 +94,7 @@ export default class SignUp extends React.Component {
                     </Input>
                 </div>
                 <Button
+                    id='login_submit'
                     type='submit'
                 >
                     Sign Up

@@ -18,7 +18,7 @@ export default class SignUpRoute extends React.Component {
         return (
             <Section className="SignUpRoute">
                 <h2>Sign Up</h2>
-                <p className="PasswordRules">
+                <p className="password_rules">
                     To register an account, please select a User Name and Password.  
                     Your User Name must be at least 9 characters long.  
                     Your password must contain at least one uppercase letter, lowercase letter, number and special character.  
