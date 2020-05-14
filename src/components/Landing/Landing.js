@@ -27,6 +27,13 @@ export default class Landing extends React.Component {
                     Try to get as many points as you can!  If you hit a string of unlucky guesses and need more points, you can top up your account on the Account page!
                     </p>
                 </section>
+                <section className='landing_section'>
+                    <h3>Try it out</h3>
+                    <div className='right placeholder'>Placeholder DemoUser</div>  
+                    <p className='landing_paragraph'>
+                    Want to try it out?  We've set up a demo account for you!  Simply click on the "Log In" button in the header above and enter the User Name 'DemoUser' with the Password 'P4ssWord!' to try things out.
+                    </p>
+                </section>
                 <section className='signup'>
                     <h3>Sound like fun?</h3>
                     <Link to='/signup'>

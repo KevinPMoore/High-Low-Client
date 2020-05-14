@@ -4,13 +4,35 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: grey;
+    background: #1D86B3;
+}
+
+.homelink {
+    color: #FFFBA1;
+}
+
+.tagline {
+    color: #FFFBA1;
+}
+
+img {
+    height: 64px;
+    width: 64px;
+}
+
+.buttonscontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 70px;
+    min-height: 200px;
 }
 
 .notloggedin {
     margin-top: auto;
     margin-bottom: auto;
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
 }
 
@@ -18,6 +40,7 @@ nav {
     margin-top: auto;
     margin-bottom: auto;
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
 }
 
@@ -35,8 +58,7 @@ nav {
     min-height: 30px;
     min-width: 70px;
     max-height: 50px;
-    margin-left: 8px;
-    margin-right: 8px;
+    margin: 8px;
 }
 
 .navbutton:hover {
