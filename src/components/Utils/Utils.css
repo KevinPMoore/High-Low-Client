@@ -1,20 +1,11 @@
-body * {
-    font-size: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-}
-
-main {
-    padding-top: 60px;
-}
-
 .Button {
     border-radius: 8px;
-    background-color: #FFFBA1;
+    color: #212121;
+    background-color: #009688;
     transition-duration: 0.3s;
 }
 
 .Button:hover {
-    color: #FFFBA1;
-    background-color: #B34D5D;
+    color: #009688;
+    background-color: #212121;
 }

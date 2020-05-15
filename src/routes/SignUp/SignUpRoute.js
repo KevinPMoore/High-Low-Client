@@ -17,7 +17,7 @@ export default class SignUpRoute extends React.Component {
     render() {
         return (
             <Section className="SignUpRoute">
-                <h2>Sign Up</h2>
+                <h2 className='signuph'>Sign Up</h2>
                 <SignUp
                   onSignUpSuccess={this.handleSignUpSuccess}
                   setUser={this.props.setUser}

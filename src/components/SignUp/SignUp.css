@@ -1,23 +1,38 @@
 .SignUpRoute {
-    height: 100vh;
-    background-color: #FF879B;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
-.passwordrules {
-    text-align: center;
-    padding-left: 20px;
-    padding-right: 20px;
+.signuph {
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 2px 2px #212121;
 }
 
 .signup_form {
-    min-width: 40%;
-    max-width: 80%;
-    min-height: 180px;
-    max-height: 260px;
+    min-width: 200px;
+    max-width: 280px;
+    min-height: 200px;
+    max-height: 360px;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    background-color: #73D2FA;
+    background-color: #3F51B5;
+    box-shadow: 5px 8px 8px #212121;
+}
+
+.passwordrules {
+    font-size: 0.9rem;
+    text-align: center;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+#login_submit {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
