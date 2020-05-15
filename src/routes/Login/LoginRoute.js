@@ -19,9 +19,7 @@ export default class LoginRoute extends React.Component {
     render() {
         return (
             <Section className='LoginRoute'>
-                <div classname='loginintro'>
-                    <h2>Log In</h2>
-                </div>
+                    <h2 className='loginh'>Log In</h2>
                 <Login
                   onLoginSuccess={this.handleLoginSuccess}
                   setUser={this.props.setUser}

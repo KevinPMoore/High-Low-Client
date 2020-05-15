@@ -1,16 +1,21 @@
 .LoginRoute {
     height: 100vh;
-    margin-top: 90px;
+    margin-top: 50px;
     background-color: #FF879B;
     display: flex;
     justify-content: center;
 }
 
+.loginh {
+    min-width: 120px;
+    padding-left: 4px;
+    margin-bottom: auto;
+}
+
 .loginform {
-    min-width: 50%;
-    max-width: 80%;
+    min-width: 200px;
     min-height: 180px;
-    max-height: 220px;
+    max-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
