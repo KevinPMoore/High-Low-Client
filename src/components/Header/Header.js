@@ -105,7 +105,7 @@ export default class Header extends React.Component {
                 <div>
                     <img className={this.state.burger} src={HamburgerMenu} alt='a hamburger icon of three horizontle lines' onClick={this.handleToggleClick}></img>
                     <div className={[this.state.buttons, 'buttonscontainer'].join(' ')}>
-                        <img src={XIcon} alt='a yellow X' onClick={this.handleToggleClick}></img>
+                        <img className ='xicon' src={XIcon} alt='a yellow X' onClick={this.handleToggleClick}></img>
                         {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}  
                     </div>
                 </div>

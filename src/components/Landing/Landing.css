@@ -6,7 +6,8 @@
 }
 
 .landing_section {
-    width: 80%;
+    min-width: 280px;
+    max-width: 300px;
     min-height: 300px;
     padding: 30px 15px;
     background-color: #73D2FA;
@@ -29,9 +30,10 @@
 }
   
 .signup {
-    max-height: 180px;
+    max-height: 120px;
     min-height: 100px;
-    width: 80%;
+    min-width: 280px;
+    max-width: 300px;
     padding: 30px 15px;
     display: flex;
     flex-direction: column;

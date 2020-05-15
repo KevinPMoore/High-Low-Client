@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../Utils/Utils';
 import { Link } from 'react-router-dom';
 import './Landing.css';
 
@@ -37,7 +38,7 @@ export default class Landing extends React.Component {
                 <section className='signup'>
                     <h3>Sound like fun?</h3>
                     <Link to='/signup'>
-                        <button>Sign Up</button>
+                        <Button>Sign Up</Button>
                     </Link>
                 </section>
             </div>
