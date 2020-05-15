@@ -7,6 +7,10 @@ nav {
     background: #1D86B3;
 }
 
+.home {
+    padding-left: 8px;
+}
+
 .homelink {
     color: #FFFBA1;
 }

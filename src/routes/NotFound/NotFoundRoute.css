@@ -1,0 +1,10 @@
+.notfoundpage {
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+}
+
+.notfoundheader, .notfoundp {
+    margin-left: auto;
+    margin-right: auto;
+}

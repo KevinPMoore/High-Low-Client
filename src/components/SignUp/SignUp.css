@@ -3,23 +3,20 @@
     margin-top: 90px;
     background-color: #FF879B;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
 
-.password_rules {
-    margin-left: auto;
-    margin-right: auto;
-    min-width: 300px;
-    max-width: 80%;
+.passwordrules {
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .signup_form {
-    margin-left: auto;
-    margin-right: auto;
-    min-width: 50%;
+    min-width: 40%;
     max-width: 80%;
     min-height: 180px;
-    max-height: 220px;
+    max-height: 260px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

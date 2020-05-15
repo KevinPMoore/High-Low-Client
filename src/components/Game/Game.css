@@ -1,22 +1,64 @@
 .GameRoute {
-    margin-top: 100px;
+    height: 100vh;
+    background-color: #FF879B;
 }
 
-.display {
-    min-width: 200px;
-    max-width: 200px;
-    min-height: 200px;
-    max-height: 200px;
-    background: black;
+.game {
+    background-color: #73D2FA;
+    margin-top: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+.currentnumber {
+    margin: auto;
+}
+
+.ticker {
+    margin: auto;
+}
+
+.countdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+}
+
+.display {
+    margin: auto;
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    background: #1D86B3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 50%;
+}
+
 .bignumber {
-    color: white;
-    align-self: center;
+    color: #FFFBA1;
+    margin: auto;
     font-size: 100px;
+}
+
+.wagerform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wager {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .modal {
@@ -43,6 +85,8 @@
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .close {
@@ -74,8 +118,11 @@ cursor: pointer;
 }
 
 .wagerbuttons {
+    margin-left: auto;
+    margin-right: auto;
     width: 30%;
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
     margin-top: 8px;
 }

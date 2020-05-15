@@ -52,33 +52,35 @@ export default class Account extends React.Component {
         const bank = this.props.bank
         const user = this.props.user
         return (
-            <div className='user_info'>
-                <p>User name: <span>{user}</span></p>
-                <p>Points: <span>{bank}</span></p>
-                <Button
-                    className='top_up'
-                    onClick={this.updateTopUp}
-                >
-                    Top Up
-                </Button>
-                <Button
-                    className='delete'
-                    onClick={this.updateDelete}
-                >
-                    Delete Account
-                </Button>
+            <div className='userinfo'>
+                <p className='userp'>User name: <span className='userspan'>{user}</span></p>
+                <p className='pointsp'>Points: <span className='pointsspan'>{bank}</span></p>
+                <div className='userbuttons'>
+                    <Button
+                        className='topup'
+                        onClick={this.updateTopUp}
+                    >
+                        Top Up
+                    </Button>
+                    <Button
+                        className='delete'
+                        onClick={this.updateDelete}
+                    >
+                        Delete Account
+                    </Button>
+                </div>
                 <div className={this.state.topUp}>
                     <div className='modal_content'>
                         <p>This will reset your points to 100.  Are you sure?</p>
                         <Button className='confirm' onClick={this.resetPoints}>Confirm</Button>
-                        <Button className='cancel_top_up' onClick={this.updateTopUp}>Cancel</Button>
+                        <Button className='canceltopup' onClick={this.updateTopUp}>Cancel</Button>
                     </div>
                 </div>
                 <div className={this.state.delete}>
                     <div className='modal_content'>
                         <p>This will delete your account.  This is permanent and cannot be undone.  Are you sure?</p>
                         <Button className='confirm' onClick={this.deleteAccount}>Confirm</Button>
-                        <Button className='cancel_delete' onClick={this.updateDelete}>Cancel</Button>
+                        <Button className='canceldelete' onClick={this.updateDelete}>Cancel</Button>
                     </div>
                 </div>
             </div>

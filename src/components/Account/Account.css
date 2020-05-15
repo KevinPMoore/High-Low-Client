@@ -1,5 +1,38 @@
 .AccountRoute {
+  height: 100vh;
+  background-color: #FF879B;
+}
+
+.userinfo {
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 90px;
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+  width: 40%;
+  background-color: #73D2FA;
+}
+
+.userp, .pointsp {
+  margin-left: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.userspan, .pointsspan {
+  font-weight: normal;
+}
+
+.userbuttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.delete, .topup {
+  height: 40px;
+  width: 60px;
 }
 
 .confirm {
@@ -15,27 +48,27 @@
     cursor: pointer;
   }
 
-  .cancel_top_up {
+  .canceltopup {
     color: #aaaaaa;
     font-size: 18px;
     margin-left: 10%;
   }
 
-  .cancel_top_up:hover,
-  .cancel_top_up:focus {
+  .canceltopup:hover,
+  .canceltopup:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
   }
   
-  .cancel_delete {
+  .canceldelete {
     color: #aaaaaa;
     font-size: 18px;
     margin-left: 10%;
   }
 
-  .cancel_delete:hover,
-  .cancel_delete:focus {
+  .canceldelete:hover,
+  .canceldelete:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;

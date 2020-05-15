@@ -62,6 +62,12 @@ export default class SignUp extends React.Component {
                 className='signup_form'
                 onSubmit={this.handleSubmit}
             >
+                    <p className="passwordrules">
+                        To register an account, please select a User Name and Password.  
+                        Your User Name must be at least 9 characters long.  
+                        Your password must contain at least one uppercase letter, lowercase letter, number and special character.  
+                        Passwords cannot start or end with a space.
+                    </p>
                 <div className='alert'>
                     {error && <p className='red'>{error}</p>}
                 </div>

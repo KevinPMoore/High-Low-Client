@@ -237,12 +237,12 @@ export default class Game extends React.Component {
         
 
         return (
-            <section>
+            <section className='game'>
                 {this.renderModal()}
                 <section className='countdown'>
-                    <p>The current number is</p>
+                    <p className='currentnumber'>The current number is</p>
                     <div className='display'><p className='bignumber'>{displayNumber}</p></div>
-                    <p>Time remaining: {mins} minutes and {seconds} seconds</p>
+                    <p className='ticker'>Time remaining: {mins} minutes and {seconds} seconds</p>
                     {this.renderWagerMessage()}
                 </section>
                 <form 
