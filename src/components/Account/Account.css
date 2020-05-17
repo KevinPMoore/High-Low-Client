@@ -1,17 +1,17 @@
 .AccountRoute {
-  height: 100vh;
-  background-color: #FF879B;
+  height: 100%;
 }
 
 .userinfo {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 90px;
+  margin: auto;
   display: flex;
   flex-direction: column;
+  min-width: 200px;
+  max-width: 280px;
   min-height: 180px;
-  width: 40%;
-  background-color: #73D2FA;
+  max-height: 300px;
+  background-color: #3F51B5;
+  box-shadow: 5px 8px 8px #212121;
 }
 
 .userp, .pointsp {

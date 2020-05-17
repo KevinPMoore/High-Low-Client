@@ -9,3 +9,11 @@
     color: #009688;
     background-color: #212121;
 }
+
+.Input {
+    box-shadow: 5px 8px 8px #212121;
+}
+
+select {
+    box-shadow: 5px 8px 8px #212121;
+}

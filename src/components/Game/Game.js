@@ -190,11 +190,11 @@ export default class Game extends React.Component {
         const {currentWager, currentComparison} = this.state
         if ((this.state.currentWager !== 0) && (this.state.currentWager !== null)) {
             return(
-                <p>You bet {currentWager} points that the next number will be {currentComparison}!</p>
+                <p className='currentwager'>You bet {currentWager} points that the next number will be {currentComparison}!</p>
             )
         } else {
             return(
-                <p>You have not placed a bet, but there is still time!</p>
+                <p className='currentwager'>You have not placed a bet, but there is still time!</p>
             )
         }
     }
@@ -203,11 +203,11 @@ export default class Game extends React.Component {
         const bank = this.props.bank
         if (bank !== 0) {
             return(
-                <p>You currently have {bank} points!</p>
+                <p className='pointtotal'>You currently have {bank} points!</p>
             )
         } else {
             return(
-                <p>Sorry, you're out of points!  You can get more under 'My Account'.</p>
+                <p className='pointtotal'>Sorry, you're out of points!  You can get more under 'My Account'.</p>
             )
         }
     }
@@ -254,7 +254,7 @@ export default class Game extends React.Component {
                     </div>
                     <div className='wager'>
                         <div className='wagerinputs'>
-                            <label htmlFor='pointwager'>
+                            <label className='pointlabel' htmlFor='pointwager'>
                                 I bet
                             </label>
                             <Input
@@ -269,8 +269,8 @@ export default class Game extends React.Component {
                                 required
                             >
                             </Input>
-                            <span>points </span>
-                            <label htmlFor='comparison'>
+                            <span className='pointlabel'>points </span>
+                            <label className='comparisonlabel' htmlFor='comparison'>
                                 the next number will be
                             </label>
                             <select
