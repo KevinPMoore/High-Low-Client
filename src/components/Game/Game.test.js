@@ -6,5 +6,3 @@ it('renders without crashing', () => {
     const renderer = new ShallowRenderer();
     renderer.render(<Game/>)
 })
-
-//add snapshot tests for Game as DemoUser after styling

@@ -6,5 +6,3 @@ it('renders without crashing', () => {
     const renderer = new ShallowRenderer();
     renderer.render(<Account/>)
 })
-
-//add snapshot tests of Account as DemoUser after styling

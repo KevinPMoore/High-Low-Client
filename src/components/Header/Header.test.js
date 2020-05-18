@@ -7,5 +7,3 @@ it('renders without crashing', () => {
     const renderer = new ShallowRenderer();
     renderer.render(<Header/>);
 })
-
-//add snapshot tests for logged out and logged in after styling

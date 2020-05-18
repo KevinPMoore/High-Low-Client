@@ -6,5 +6,3 @@ it('renders without crashing', () => {
     const renderer = new ShallowRenderer();
     renderer.render(<SignUp/>)
 })
-
-//add snapshot tests of form after styling

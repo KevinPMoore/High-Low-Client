@@ -6,5 +6,3 @@ it('renders without crashing', () => {
     const renderer = new ShallowRenderer();
     renderer.render(<Landing/>)
 })
-
-//add snapshot tests of after styling and correct text overview as needed
