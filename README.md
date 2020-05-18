@@ -24,7 +24,7 @@ Screenshots taken from the mobile client.
 ## API documentation
 ### GET api/users
 Returns a list of all users.  An example user is below.
-![a screenshot of a user object from the API](./images/APIUsersSS.png)
+![a screenshot of a user object from the API](./images/APIUserSS.png)
 
 ### POST api/users
 Adds a user to the database.  The 'user_name' and 'password' keys are required while bank and admin are set to 100 and false by default.  The password is hashed on insertion into the database.
