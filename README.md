@@ -10,21 +10,21 @@ High-Low is a lightweight game where users place wagers to earn points.  A rando
 Screenshots taken from the mobile client.
 
 ### Landing Page
-![a screenshot of the landing page](../images/LandingSS.png)
+![a screenshot of the landing page](./images/LandingSS.png)
 
 ### Login Page
-![a screenshot of a login page](../images/LoginSS.png)
+![a screenshot of a login page](./images/LoginSS.png)
 
 ### Game Page
-![a screenshot of the game page](../images/GameSS.png)
+![a screenshot of the game page](./images/GameSS.png)
 
 ### Account Page
-![a screenshot of the account page](../images/AccountSS.png)
+![a screenshot of the account page](./images/AccountSS.png)
 
 ## API documentation
 ### GET api/users
 Returns a list of all users.  An example user is below.
-![a screenshot of a user object from the API](../images/APIUsersSS.png)
+![a screenshot of a user object from the API](./images/APIUsersSS.png)
 
 ### POST api/users
 Adds a user to the database.  The 'user_name' and 'password' keys are required while bank and admin are set to 100 and false by default.  The password is hashed on insertion into the database.
@@ -40,7 +40,7 @@ Removes the user with the 'user_id' in the search parameter from the database.  
 
 ### POST api/auth/login
 Generates an authToken and user object when provided with valid login credentials.  These are used to access protected endpoints.  An example is below.
-![a screenshot of the user and authToken from the API](../images/APIAuthSS.png)
+![a screenshot of the user and authToken from the API](./images/APIAuthSS.png)
 
 ## Technologies used
 The front end of this project was built using React and styled with vanilla CSS.
