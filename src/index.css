@@ -28,3 +28,13 @@ main {
 .App_main {
   height: 100%;
 }
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 1.3rem;
+  }
+
+  main {
+    padding-top: 80px;
+  }
+}

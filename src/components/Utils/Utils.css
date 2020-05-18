@@ -17,3 +17,9 @@
 select {
     box-shadow: 5px 8px 8px #212121;
 }
+
+@media screen and (min-width: 768px) {
+    .Button {
+        font-size: 1rem;
+    }
+}

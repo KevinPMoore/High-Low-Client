@@ -30,9 +30,37 @@
     text-align: center;
     padding-left: 2px;
     padding-right: 2px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #BDBDBD;
 }
 
 #login_submit {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .signup_form {
+        min-width: 380px;
+        min-height: 400px;
+        max-height: 500px;
+    }
+
+    .passwordrules {
+        font-size: 1.2rem;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .signupuserlabel, .signuppasswordlabel {
+        align-self: center;
+        font-size: 1.5rem;
+    }
+
+    #signup_user_name, #signup_password {
+        min-width: 200px;
+        max-width: 300px;
+        min-height: 30px;
+        margin-bottom: 4px;
+    }
 }

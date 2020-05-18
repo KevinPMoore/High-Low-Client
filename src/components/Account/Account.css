@@ -73,3 +73,27 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+@media screen and (min-width: 768px) {
+  .userinfo {
+    margin-top: 20px;
+    min-width: 240px;
+    max-width: 320px;
+    min-height: 220px;
+    max-height: 340px;
+  }
+
+  .userp, .pointsp {
+    font-size: 1.3rem;
+  }
+
+  .userspan, .pointsspan {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .delete, .topup {
+    height: 60px;
+    width: 80px;
+  }
+}

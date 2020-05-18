@@ -9,6 +9,10 @@ nav {
     border-bottom: 1px solid #BDBDBD;
 }
 
+.hide {
+    display: none;
+}
+
 .home {
     padding-left: 8px;
 }
@@ -35,7 +39,6 @@ img:hover {
 }
 
 .buttonscontainer {
-    display: flex;
     flex-direction: column;
     justify-content: center;
     min-width: 70px;
@@ -81,5 +84,46 @@ img:hover {
 }
 
 .xicon {
-    align-self: flex-end;
+    padding-left: 10px;
+}
+
+.signuplink {
+    align-content: center;
+    max-width: 64px;
+}
+
+@media screen and (min-width: 768px) {
+    nav {
+        height: 80px;
+    }
+
+    .hide {
+        display: initial;
+    }
+
+    .xicon, .burgericon {
+        display: none;
+    }
+
+    .buttonscontainer {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        min-height: 80px;
+        max-height: 80px;
+        width: 300px;
+    }
+
+    .notloggedin, .loggedin {
+        margin: auto;
+        min-width: 200px;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .navbutton {
+        min-height: 40px;
+        min-width: 80px;
+        max-height: 60px;
+    }
 }

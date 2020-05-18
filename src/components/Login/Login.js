@@ -61,11 +61,12 @@ export default class Login extends React.Component {
                     {error && <p className='red'>{error}</p>}
                 </div>
                 <div className='user_name'>
-                    <label htmlFor='login_user_name'>
+                    <label className='loginuserlabel' htmlFor='login_user_name'>
                         User Name
                     </label>
                     <Input
                         name='user_name'
+                        type='text'
                         id='login_user_name'
                         placeholder='ex. CoolGuyJokes87'
                         required
@@ -74,7 +75,7 @@ export default class Login extends React.Component {
                     </Input>
                 </div>
                 <div className='password'>
-                    <label htmlFor='login_password'>
+                    <label className='loginpasswordlabel' htmlFor='login_password'>
                         Password
                     </label>
                     <Input

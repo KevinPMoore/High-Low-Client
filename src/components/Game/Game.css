@@ -96,7 +96,9 @@
 }
 
 .modal_content {
+    font-size: 0.9rem;
     background-color: #fefefe;
+    color: black;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -155,4 +157,65 @@ cursor: pointer;
     width: 60px;
     margin-left: 8px;
     margin-top: 2px;
+}
+
+@media screen and (min-width: 768px) {
+    .game {
+        margin-top: 20px;
+        width: 90%;
+        background-color: #C5CAE9;
+        box-shadow: none;
+    }
+
+    .countdown {
+        background-color: #3F51B5;
+        box-shadow: 5px 8px 8px #212121;
+        margin: 20px;
+    }
+
+    .wager {
+        width: 100%;
+        min-height: 140px;
+        background-color: #3F51B5;
+        box-shadow: 5px 8px 8px #212121;
+        margin: 20px;
+    }
+
+    .wagerinputs {
+        margin-top: 10px;
+    }
+
+    .pointlabel, .comparisonlabel {
+        font-size: 1.4rem;
+    }
+
+    #pointwager, #comparison {
+        height: 20px;
+        width: 60px;
+    }
+
+    .wagerbuttons {
+        width: 50%;
+    }
+
+    .setwager, .resetwager {
+        height: 60px;
+        width: 80px;
+        margin: auto;
+    }
+
+    .pointtotal {
+        align-self: center;
+        text-align: center;
+        min-height: 50px;
+        min-width: 300px;
+        background-color: #3F51B5;
+        box-shadow: 5px 8px 8px #212121;
+        padding: 4px;
+    }
+
+    .modal_content {
+        font-size: 1.1rem;
+        width: 90%;
+    }
 }

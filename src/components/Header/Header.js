@@ -8,23 +8,23 @@ import './Header.css';
 
 export default class Header extends React.Component {
     state = {
-        burger: 'shown',
-        buttons: 'hidden'
+        burger: 'show',
+        buttons: 'hide'
     }
 
     updateBurger = () => {
-        if(this.state.burger === 'hidden' ) {
-            this.setState({ burger: 'shown' })
+        if(this.state.burger === 'hide' ) {
+            this.setState({ burger: 'show' })
         } else {
-            this.setState({ burger: 'hidden' })
+            this.setState({ burger: 'hide' })
         }
     }
 
     updateButtons = () => {
-        if(this.state.buttons === 'hidden' ) {
-            this.setState({ buttons: 'shown' })
+        if(this.state.buttons === 'hide' ) {
+            this.setState({ buttons: 'show' })
         } else {
-            this.setState({ buttons: 'hidden' })
+            this.setState({ buttons: 'hide' })
         }
     }
 
@@ -103,9 +103,9 @@ export default class Header extends React.Component {
                     <span className='tagline'>Test your luck</span>
                 </div>
                 <div>
-                    <img className={this.state.burger} src={HamburgerMenu} alt='a hamburger icon of three horizontle lines' onClick={this.handleToggleClick}></img>
+                    <img className={[this.state.burger, 'burgericon'].join(' ')} src={HamburgerMenu} alt='a hamburger icon of three horizontle lines' onClick={this.handleToggleClick}></img>
                     <div className={[this.state.buttons, 'buttonscontainer'].join(' ')}>
-                        <img className ='xicon' src={XIcon} alt='a yellow X' onClick={this.handleToggleClick}></img>
+                        <img className ='xicon' src={XIcon} alt='a green X' onClick={this.handleToggleClick}></img>
                         {TokenService.hasAuthToken() ? this.renderLogout() : this.renderLogin()}  
                     </div>
                 </div>

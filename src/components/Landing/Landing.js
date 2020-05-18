@@ -37,8 +37,8 @@ export default class Landing extends React.Component {
                 </section>
                 <section className='signupsection'>
                     <h3>Sound like fun?</h3>
-                    <Link to='/signup'>
-                        <Button>Sign Up</Button>
+                    <Link to='/signup' className='signupa'>
+                        <Button className='signupa'>Sign Up</Button>
                     </Link>
                 </section>
             </div>

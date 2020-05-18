@@ -63,7 +63,7 @@ export default class SignUp extends React.Component {
                 onSubmit={this.handleSubmit}
             >
                     <p className="passwordrules">
-                        To register an account, please select a User Name and Password.  
+                        To register an account, select a User Name and Password.  
                         Your User Name must be at least 9 characters long.  
                         Your password must contain at least one uppercase letter, lowercase letter, number and special character.  
                         Passwords cannot start or end with a space.
@@ -72,7 +72,7 @@ export default class SignUp extends React.Component {
                     {error && <p className='red'>{error}</p>}
                 </div>
                 <div className='user_name'>
-                    <label htmlFor='signup_user_name'>
+                    <label className='signupuserlabel' htmlFor='signup_user_name'>
                         User name <Required />
                     </label>
                     <Input
@@ -86,7 +86,7 @@ export default class SignUp extends React.Component {
                     </Input>
                 </div>
                 <div className='password'>
-                    <label htmlFor='signup_password'>
+                    <label className='signuppasswordlabel' htmlFor='signup_password'>
                         Password <Required />
                     </label>
                     <Input

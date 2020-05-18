@@ -11,6 +11,11 @@
     max-height: 320px;
     padding: 10px 10px;
     background-color: #3F51B5;
+    border: 1px solid #BDBDBD;
+}
+
+.landing_section:nth-of-type(even) {
+    background-color: #303F9F;
 }
 
 .placeholder {
@@ -36,9 +41,15 @@
     max-width: 300px;
     padding: 10px 10px;
     display: flex;
+    justify-content: space-evenly;
     flex-direction: column;
     text-align: center;
-    background-color: #303F9F;
+    background-color: #3F51B5;
+}
+
+.signupa {
+    align-self: center;
+    max-width: 64px;
 }
 
 .landing_paragraph {
@@ -48,4 +59,41 @@
 
 button:hover {
     cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    .landing_section {
+        min-width: 520px;
+        min-height: 340px;
+        margin-bottom: 15px;
+        box-shadow: 5px 8px 8px #212121;
+    }
+
+    h3 {
+        text-shadow: 5px 8px 8px #212121;
+    }
+
+    .landing_paragraph {
+        margin: 4px;
+    }
+
+    .placeholder {
+        margin: 4px;
+    }
+
+    .signupsection {
+        min-width: 520px;
+        min-height: 100px;
+        margin-bottom: 10px;
+        box-shadow: 5px 8px 8px #212121;
+        border: 1px solid #BDBDBD;
+    }
+
+    .signupa {
+        min-height: 40px;
+        min-width: 80px;
+        max-height: 50px;
+        margin-bottom: 8px;
+    }
+    
 }
