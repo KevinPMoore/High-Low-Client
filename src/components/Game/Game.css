@@ -146,15 +146,23 @@ cursor: pointer;
 }
 
 .setwager {
-    height: 40px;
-    width: 60px;
+    height: 50px;
+    width: 70px;
     margin-right: 8px;
     margin-top: 2px;
 }
 
 .resetwager {
-    height: 40px;
-    width: 60px;
+    height: 50px;
+    width: 70px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 2px;
+}
+
+.lockwager {
+    height: 50px;
+    width: 70px;
     margin-left: 8px;
     margin-top: 2px;
 }
@@ -178,7 +186,8 @@ cursor: pointer;
         min-height: 140px;
         background-color: #3F51B5;
         box-shadow: 5px 8px 8px #212121;
-        margin: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .wagerinputs {
@@ -198,7 +207,7 @@ cursor: pointer;
         width: 50%;
     }
 
-    .setwager, .resetwager {
+    .setwager, .resetwager, .lockwager {
         height: 60px;
         width: 80px;
         margin: auto;
@@ -212,6 +221,9 @@ cursor: pointer;
         background-color: #3F51B5;
         box-shadow: 5px 8px 8px #212121;
         padding: 4px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
     }
 
     .modal_content {

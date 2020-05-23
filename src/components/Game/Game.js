@@ -18,22 +18,9 @@ export default class Game extends React.Component {
         validation: 'valid',
     }
 
-    updateDrawnAndDisplayNumbers = () => {
-        let randNum1 = Math.floor(Math.random()*100)+1
-        let randNum2 = Math.floor(Math.random()*100)+1
-        while (randNum2 === randNum1) {
-            randNum2 = Math.floor(Math.random()*100)+1
-        }
-        this.setState({
-            displayNumber: randNum1,
-            drawnNumber: randNum2
-        })
-    }
-
     updateDisplayNumber = () => {
-        let randNum = Math.floor(Math.random()*100)+1
         this.setState({
-            displayNumber: randNum
+            displayNumber: this.state.drawnNumber
         })
     }
 
@@ -80,12 +67,24 @@ export default class Game extends React.Component {
 
     updateTimeRemaining = () => {
         if (this.state.timeRemaining === 0) {
-            this.setState({ timeRemaining: 120000 })
+            this.setState({ timeRemaining: 60000 })
             this.handleCompareNumbers()
             clearInterval(this.state.interval)
         }
         this.setState({
           timeRemaining: this.state.timeRemaining - 1000
+        })
+    }
+
+    setFirstNumbers = () => {
+        let randNum1 = Math.floor(Math.random()*100)+1
+        let randNum2 = Math.floor(Math.random()*100)+1
+        while (randNum2 === randNum1) {
+            randNum2 = Math.floor(Math.random()*100)+1
+        }
+        this.setState({
+            displayNumber: randNum1,
+            drawnNumber: randNum2
         })
     }
 
@@ -123,10 +122,18 @@ export default class Game extends React.Component {
         })
     }
 
+    handleEndTimer = () => {
+        this.setState({
+            timeRemaining: 0
+        })
+        this.handleCompareNumbers()
+    }
+
     handleCompareNumbers = () => {
         if (this.state.currentWager === null) {
             let interval = setInterval(this.updateTimeRemaining, 1000)
-            this.updateDrawnAndDisplayNumbers()
+            this.updateDisplayNumber();
+            this.updateDrawnNumber();
             this.setState({
                 timeRemaining: 60000,
                 currentWager: null,
@@ -140,7 +147,8 @@ export default class Game extends React.Component {
             })
             this.updateModal()
             let interval = setInterval(this.updateTimeRemaining, 1000)
-            this.updateDrawnAndDisplayNumbers()
+            this.updateDisplayNumber();
+            this.updateDrawnNumber();
             this.setState({
                 timeRemaining: 60000,
                 currentWager: null,
@@ -154,7 +162,8 @@ export default class Game extends React.Component {
             })
             this.updateModal()
             let interval = setInterval(this.updateTimeRemaining, 1000)
-            this.updateDrawnAndDisplayNumbers()
+            this.updateDisplayNumber();
+            this.updateDrawnNumber();
             this.setState({
                 timeRemaining: 60000,
                 currentWager: null,
@@ -170,7 +179,7 @@ export default class Game extends React.Component {
                 <div className={this.state.modal}>
                     <div className='modal_content'>
                         <Button className='close' onClick={this.updateModal}>&times;</Button>
-                        <p>The next number was {this.state.drawnNumber}.  Congratulations!  You won {wager} points!  Your new total is {this.props.bank} points. Keep it up!</p>
+                        <p>The next number was {this.state.displayNumber}.  Congratulations!  You won {wager} points!  Your new total is {this.props.bank} points. Keep it up!</p>
                     </div>
                 </div>
             )
@@ -179,7 +188,7 @@ export default class Game extends React.Component {
                 <div className={this.state.modal}>
                     <div className='modal_content'>
                         <Button className='close' onClick={this.updateModal}>&times;</Button>
-                        <p>The next number was {this.state.drawnNumber}.  Awww shucks!  You lost {wager} points.  Your new total is {this.props.bank} points.  Better luck next time!</p>
+                        <p>The next number was {this.state.displayNumber}.  Awww shucks!  You lost {wager} points.  Your new total is {this.props.bank} points.  Better luck next time!</p>
                     </div>
                 </div>
             )
@@ -213,7 +222,7 @@ export default class Game extends React.Component {
     }
 
     componentDidMount() {
-        this.updateDrawnAndDisplayNumbers()
+        this.setFirstNumbers()
 
         let interval = setInterval(this.updateTimeRemaining, 1000)
     
@@ -297,6 +306,12 @@ export default class Game extends React.Component {
                                 onClick={this.handleWagerCancel}
                             >
                                 Cancel wager
+                            </Button>
+                            <Button
+                                className='lockwager'
+                                onClick={this.handleEndTimer}
+                            >
+                                Lock in
                             </Button>
                         </div>
                     </div>
