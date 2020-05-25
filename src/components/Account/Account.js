@@ -8,49 +8,50 @@ export default class Account extends React.Component {
     state = {
         topUp: 'hidden',
         delete: 'hidden',
-    }
+    };
 
     updateTopUp = () => {
         if (this.state.topUp === 'hidden') {
             this.setState({
                 topUp: 'modal'
-            })
+            });
         } else {
             this.setState({
                 topUp: 'hidden'
-            })
+            });
         }
-    }
+    };
 
     updateDelete = () => {
         if (this.state.delete === 'hidden') {
             this.setState({
                 delete: 'modal'
-            })
+            });
         } else {
             this.setState({
                 delete: 'hidden'
-            })
+            });
         }
-    }
+    };
 
     resetPoints = () => {
-        this.props.updateBank(100)
-        this.updateTopUp()
-    }
+        this.props.updateBank(100);
+        this.updateTopUp();
+    };
 
+    //Sends delete request to remove user from the API, clears authToken, then redirects to the home route
     deleteAccount = () => {
-        const id = this.props.userId
-        UserApiService.deleteUser(id)
-        this.updateDelete()
-        this.props.handleDeleteSuccess()
-        this.props.updateLoggedIn()
-        TokenService.clearAuthToken()
-    }
+        const id = this.props.userId;
+        UserApiService.deleteUser(id);
+        this.updateDelete();
+        this.props.handleDeleteSuccess();
+        this.props.updateLoggedIn();
+        TokenService.clearAuthToken();
+    };
 
     render() {
-        const bank = this.props.bank
-        const user = this.props.user
+        const bank = this.props.bank;
+        const user = this.props.user;
         return (
             <div className='userinfo'>
                 <p className='userp'>User name: <span className='userspan'>{user}</span></p>
@@ -84,6 +85,6 @@ export default class Account extends React.Component {
                     </div>
                 </div>
             </div>
-        )
-    }
-}
+        );
+    };
+};

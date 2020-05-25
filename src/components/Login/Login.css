@@ -11,6 +11,12 @@
     text-shadow: 2px 2px #212121;
 }
 
+.red {
+    color: white;
+    text-shadow: 2px 2px black;
+    text-align: center;
+}
+
 .loginform {
     min-width: 200px;
     max-width: 280px;

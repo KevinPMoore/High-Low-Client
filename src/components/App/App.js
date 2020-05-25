@@ -1,5 +1,5 @@
 import React from 'react';
-import UserApiService from '../../services/user-api-service'
+import UserApiService from '../../services/user-api-service';
 import { Route, Switch } from 'react-router-dom';
 import PrivateOnlyRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicRoute';
@@ -19,38 +19,39 @@ class App extends React.Component {
     loggedIn: false,
     user: '',
     userId: 0
-  }
+  };
 
+  //Passed to Login and Signup to populate initial user information
   setInitialState = ({bank, user_name, id}) => {
       this.setState({
         bank: bank,
         user: user_name,
         userId: id
-      })
-  }
+      });
+  };
 
   updateBank = (num) => {
-    const id = this.state.userId
-    const user = this.state.user
+    const id = this.state.userId;
+    const user = this.state.user;
     UserApiService.patchUser(id, user, num)
     .then(
       this.setState({
           bank: num
       })
-    )
-  }
+    );
+  };
 
   updateHasError = () => {
     this.setState({
       hasError: !this.state.hasError
-    })
-  }
+    });
+  };
 
   updateLoggedIn = () => {
     this.setState({
       loggedIn: !this.state.loggedIn
-    })
-  }
+    });
+  };
 
   render() {
 
@@ -108,7 +109,7 @@ class App extends React.Component {
         </main>
       </div>
     );
-  }
-}
+  };
+};
 
 export default App;

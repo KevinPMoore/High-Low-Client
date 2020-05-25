@@ -7,12 +7,12 @@ export default class SignUpRoute extends React.Component {
         history: {
             push: () => {},
         },
-    }
-
+    };
+    
     handleSignUpSuccess = user => {
         const { history } = this.props
         history.push('/game')
-    }
+    };
 
     render() {
         return (
@@ -23,6 +23,6 @@ export default class SignUpRoute extends React.Component {
                   setUser={this.props.setUser}
                 />
             </Section>
-        )
-    }
-}
+        );
+    };
+};

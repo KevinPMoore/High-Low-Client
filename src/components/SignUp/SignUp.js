@@ -7,30 +7,31 @@ import './SignUp.css';
 export default class SignUp extends React.Component {
     static defaultProps= {
         onSignUpSuccess: () => {}
-    }
+    };
 
     state = { 
         error: null,
         username: '',
         password: ''
-    }
+    };
 
     updateUsername = (ev) => {
         this.setState({
             username: ev.target.value
-        })
-    }
+        });
+    };
 
     updatePassword = (ev) => {
         this.setState({
             password: ev.target.value
-        })
-    }
+        });
+    };
     
+    //Posts a new user object to the API, creates an authToken with that user, then sets initial state in App with that user's data
     handleSubmit = ev => {
-        ev.preventDefault()
-        this.setState({ error: null })
-        const { username, password } = this.state
+        ev.preventDefault();
+        this.setState({ error: null });
+        const { username, password } = this.state;
 
         AuthApiService.postUser({
             user_name: username,
@@ -52,11 +53,11 @@ export default class SignUp extends React.Component {
         })
         .catch(res => {
             this.setState({ error: res.error })
-        })
-    }
+        });
+    };
     
     render() {
-        const { error } = this.state
+        const { error } = this.state;
         return (
             <form
                 className='signup_form'
@@ -106,6 +107,6 @@ export default class SignUp extends React.Component {
                     Sign Up
                 </Button>
             </form>
-        )
-    }
-}
+        );
+    };
+};

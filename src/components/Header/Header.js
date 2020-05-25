@@ -10,33 +10,34 @@ export default class Header extends React.Component {
     state = {
         burger: 'show',
         buttons: 'hide'
-    }
+    };
 
     updateBurger = () => {
         if(this.state.burger === 'hide' ) {
-            this.setState({ burger: 'show' })
+            this.setState({ burger: 'show' });
         } else {
-            this.setState({ burger: 'hide' })
+            this.setState({ burger: 'hide' });
         }
-    }
+    };
 
     updateButtons = () => {
         if(this.state.buttons === 'hide' ) {
-            this.setState({ buttons: 'show' })
+            this.setState({ buttons: 'show' });
         } else {
-            this.setState({ buttons: 'hide' })
+            this.setState({ buttons: 'hide' });
         }
-    }
+    };
 
     handleToggleClick = () => {
-        this.updateButtons()
-        this.updateBurger()
-    }
+        this.updateButtons();
+        this.updateBurger();
+    };
 
+    //Removes the auth token and prompts a rerender of the header
     handleLogoutClick = () => {
-        TokenService.clearAuthToken()
-        this.props.updateLoggedIn()
-    }
+        TokenService.clearAuthToken();
+        this.props.updateLoggedIn();
+    };
 
     renderLogout() {
         return (
@@ -65,8 +66,8 @@ export default class Header extends React.Component {
                     </Button>
                 </Link>
             </div>
-        )
-    }
+        );
+    };
 
     renderLogin() {
         return (
@@ -88,9 +89,10 @@ export default class Header extends React.Component {
                     </Button>
                 </Link>
             </div>
-        )
-    }
+        );
+    };
 
+    //Renders header based on if there is an authToken or not
     render() {
         return (
             <nav className='header'>
@@ -110,6 +112,6 @@ export default class Header extends React.Component {
                     </div>
                 </div>
             </nav>
-        )
-    }
-}
+        );
+    };
+};

@@ -16,90 +16,93 @@ export default class Game extends React.Component {
         outcome: false,
         timeRemaining: 0,
         validation: 'valid',
-    }
+    };
 
     updateDisplayNumber = () => {
         this.setState({
             displayNumber: this.state.drawnNumber
-        })
-    }
+        });
+    };
 
+    //Generates a number to compare against the displayed number, calling itself again if those numbers are the same
     updateDrawnNumber = () => {
-        let randNum = Math.floor(Math.random()*100)+1
+        let randNum = Math.floor(Math.random()*100)+1;
         if (randNum === this.state.displayNumber) {
-            this.updateDrawnNumber()
+            this.updateDrawnNumber();
         } else {
             this.setState({
                 drawnNumber: randNum
-            })
+            });
         }
-    }
+    };
 
     updateFormInput = (ev) => {
         this.setState({
             formInput: ev.target.value
-        })
-    }
+        });
+    };
 
     updateFormSelect = (ev) => {
         this.setState({
             formSelect: ev.target.value
-        })
-    }
+        });
+    };
 
     updateModal = () => {
         if (this.state.modal === 'hidden') {
             this.setState({
                 modal: 'modal'
-            })
+            });
         } else {
             this.setState({
                 modal: 'hidden'
-            })
+            });
         }
-    }
+    };
 
     updateOutcome = () => {
         this.setState({
             outcome: !this.state.outcome
-        })
-    }
+        });
+    };
 
+    //Resets the countdown and compares the selected numbers
     updateTimeRemaining = () => {
         if (this.state.timeRemaining === 0) {
-            this.setState({ timeRemaining: 60000 })
-            this.handleCompareNumbers()
-            clearInterval(this.state.interval)
+            this.setState({ timeRemaining: 60000 });
+            this.handleCompareNumbers();
+            clearInterval(this.state.interval);
         }
         this.setState({
           timeRemaining: this.state.timeRemaining - 1000
-        })
-    }
+        });
+    };
 
     setFirstNumbers = () => {
-        let randNum1 = Math.floor(Math.random()*100)+1
-        let randNum2 = Math.floor(Math.random()*100)+1
+        let randNum1 = Math.floor(Math.random()*100)+1;
+        let randNum2 = Math.floor(Math.random()*100)+1;
         while (randNum2 === randNum1) {
-            randNum2 = Math.floor(Math.random()*100)+1
+            randNum2 = Math.floor(Math.random()*100)+1;
         }
         this.setState({
             displayNumber: randNum1,
             drawnNumber: randNum2
-        })
-    }
+        });
+    };
 
     validateWager = (wager) => {
-        let bank = this.props.bank
+        let bank = this.props.bank;
         if ((+wager > bank) || (+wager < 0)) {
             return false
         } else {
             return true
         }
-    }
+    };
 
+    //Checks that the user has made a valid wager, then updates state from the controlled form
     handleWagerSubmit = (ev) => {
-        ev.preventDefault()
-        let validation = this.validateWager(this.state.formInput)
+        ev.preventDefault();
+        let validation = this.validateWager(this.state.formInput);
         if (validation === true) {
             this.setState({
                 currentComparison: this.state.formSelect,
@@ -107,73 +110,80 @@ export default class Game extends React.Component {
                 formInput: 0,
                 formSelect: 'higher',
                 validation: 'valid'
-            })
+            });
         } else {
             this.setState({
                 validation: 'invalid'
-            }) 
+            });
         }
-    }
+    };
 
     handleWagerCancel = () => {
         this.setState({
             currentWager: 0,
             formSelect: ''
-        })
-    }
+        });
+    };
 
+    //Enables the user to end the countdown early
     handleEndTimer = () => {
         this.setState({
             timeRemaining: 0
-        })
-        this.handleCompareNumbers()
-    }
+        });
+        this.handleCompareNumbers();
+    };
 
     handleCompareNumbers = () => {
+        //If there is no wager, reset the timer and draw new numbers
         if (this.state.currentWager === null) {
-            let interval = setInterval(this.updateTimeRemaining, 1000)
+            let interval = setInterval(this.updateTimeRemaining, 1000);
             this.updateDisplayNumber();
             this.updateDrawnNumber();
             this.setState({
                 timeRemaining: 60000,
                 currentWager: null,
                 interval: interval
-            })
-        } else if (((this.state.drawnNumber > this.state.displayNumber) && this.state.currentComparison === 'higher') || ((this.state.drawnNumber < this.state.displayNumber) && this.state.currentComparison === 'lower')) {
-            const winnings = (+this.props.bank + +this.state.currentWager)
-            this.props.updateBank(winnings)
+            });
+        } 
+        //If the user guesses right, send PATCH to API to update points then reset the countdown and draw new numbers
+        else if (((this.state.drawnNumber > this.state.displayNumber) && this.state.currentComparison === 'higher') || ((this.state.drawnNumber < this.state.displayNumber) && this.state.currentComparison === 'lower')) {
+            const winnings = (+this.props.bank + +this.state.currentWager);
+            this.props.updateBank(winnings);
             this.setState({
                 outcome: true
-            })
-            this.updateModal()
-            let interval = setInterval(this.updateTimeRemaining, 1000)
+            });
+            this.updateModal();
+            let interval = setInterval(this.updateTimeRemaining, 1000);
             this.updateDisplayNumber();
             this.updateDrawnNumber();
             this.setState({
                 timeRemaining: 60000,
                 currentWager: null,
                 interval: interval
-            })
-        } else {
-            const losings = (+this.props.bank - +this.state.currentWager)
-            this.props.updateBank(losings)
+            });
+        } 
+         //If the user guesses wrong, send PATCH to API to update points then reset the countdown and draw new numbers
+        else {
+            const losings = (+this.props.bank - +this.state.currentWager);
+            this.props.updateBank(losings);
             this.setState({
                 outcome: false
-            })
-            this.updateModal()
-            let interval = setInterval(this.updateTimeRemaining, 1000)
+            });
+            this.updateModal();
+            let interval = setInterval(this.updateTimeRemaining, 1000);
             this.updateDisplayNumber();
             this.updateDrawnNumber();
             this.setState({
                 timeRemaining: 60000,
                 currentWager: null,
                 interval: interval
-            })
+            });
         }
-    }
+    };
 
+    //Checks the status of the wager then displays the result to the user
     renderModal = () => {
-        const wager = this.state.currentWager
+        const wager = this.state.currentWager;
         if (this.state.outcome === true) {
             return(
                 <div className={this.state.modal}>
@@ -182,7 +192,7 @@ export default class Game extends React.Component {
                         <p>The next number was {this.state.displayNumber}.  Congratulations!  You won {wager} points!  Your new total is {this.props.bank} points. Keep it up!</p>
                     </div>
                 </div>
-            )
+            );
         } else {
             return(
                 <div className={this.state.modal}>
@@ -191,25 +201,27 @@ export default class Game extends React.Component {
                         <p>The next number was {this.state.displayNumber}.  Awww shucks!  You lost {wager} points.  Your new total is {this.props.bank} points.  Better luck next time!</p>
                     </div>
                 </div>
-            )
+            );
         }
-    }
+    };
 
+    //Checks if the user has placed a wager then displays the selection
     renderWagerMessage = () => {
-        const {currentWager, currentComparison} = this.state
+        const {currentWager, currentComparison} = this.state;
         if ((this.state.currentWager !== 0) && (this.state.currentWager !== null)) {
             return(
                 <p className='currentwager'>You bet {currentWager} points that the next number will be {currentComparison}!</p>
-            )
+            );
         } else {
             return(
                 <p className='currentwager'>You have not placed a bet, but there is still time!</p>
-            )
+            );
         }
-    }
+    };
 
+    //Displays the user's point total when the user info is populated on App upon login/signup
     renderPointTotal = () => {
-        const bank = this.props.bank
+        const bank = this.props.bank;
         if (bank !== 0) {
             return(
                 <p className='pointtotal'>You currently have {bank} points!</p>
@@ -219,30 +231,30 @@ export default class Game extends React.Component {
                 <p className='pointtotal'>Sorry, you're out of points!  You can get more under 'My Account'.</p>
             )
         }
-    }
+    };
 
+    //Sets the initial numbers and starts a countdown on component mount
     componentDidMount() {
-        this.setFirstNumbers()
-
-        let interval = setInterval(this.updateTimeRemaining, 1000)
-    
+        this.setFirstNumbers();
+        let interval = setInterval(this.updateTimeRemaining, 1000);
         const timeRemaining = 60000;
         this.setState({
           timeRemaining,
           interval
-        })
-    }
+        });
+    };
     
+    //Clears the interval when the user navigates away from the component
     componentWillUnmount() {
-        clearInterval(this.state.interval)
-    }
+        clearInterval(this.state.interval);
+    };
 
     render() {
         const mins = Math.floor(this.state.timeRemaining / 60000);
-        const seconds = Math.floor((this.state.timeRemaining / 1000) % 60)
-        let bank = this.props.bank
-        let displayNumber = this.state.displayNumber
-        let error = this.state.error
+        const seconds = Math.floor((this.state.timeRemaining / 1000) % 60);
+        let bank = this.props.bank;
+        let displayNumber = this.state.displayNumber;
+        let error = this.state.error;
         
 
         return (
@@ -318,6 +330,6 @@ export default class Game extends React.Component {
                     {this.renderPointTotal()}
                 </form>
             </section>
-        )
-    }    
-}
+        );
+    }; 
+};

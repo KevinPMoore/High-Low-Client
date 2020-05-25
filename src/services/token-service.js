@@ -1,5 +1,6 @@
-import config from '../config'
+import config from '../config';
 
+//Creates, reads and deletes auth tokens for login
 const TokenService = {
     saveAuthToken(token) {
       window.sessionStorage.setItem(config.TOKEN_KEY, token)
@@ -16,6 +17,6 @@ const TokenService = {
     makeBasicAuthToken(userName, password) {
       return window.btoa(`${userName}:${password}`)
     },
-  }
+  };
   
-  export default TokenService
+  export default TokenService;

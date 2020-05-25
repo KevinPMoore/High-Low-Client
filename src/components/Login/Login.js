@@ -2,35 +2,36 @@ import React from 'react';
 import AuthApiService from '../../services/auth-api-service';
 import TokenService from '../../services/token-service';
 import { Button, Input } from '../Utils/Utils';
-import './Login.css'
+import './Login.css';
 
 export default class Login extends React.Component {
     static defaultProps = {
         onLoginSuccess: () => {}
-    }
+    };
 
     state = {
         error: null,
         username: '',
         password: ''
-    }
+    };
 
     updateUsername = (ev) => {
         this.setState({
             username: ev.target.value
-        })
-    }
+        });
+    };
 
     updatePassword = (ev) => {
         this.setState({
             password: ev.target.value
-        })
-    }
+        });
+    };
 
+    //Creates an authToken by calling the API, then takes the user object and populates the base state in App
     handleSubmitJwtAuth = ev => {
-        ev.preventDefault()
-        this.setState({ error: null })
-        const { username, password } = this.state
+        ev.preventDefault();
+        this.setState({ error: null });
+        const { username, password } = this.state;
 
         AuthApiService.postLogin({
             user_name: username,
@@ -46,12 +47,12 @@ export default class Login extends React.Component {
         })
         .catch(res => {
             this.setState({ error: res.error })
-        })
-    }
+        });
+    };
 
 
     render() {
-        const { error } = this.state
+        const { error } = this.state;
         return (
             <form
                 className='loginform'
@@ -97,6 +98,6 @@ export default class Login extends React.Component {
             
 
             </form>
-        )
-    }
-}
+        );
+    };
+};

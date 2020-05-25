@@ -9,6 +9,6 @@ export default class GameRoute extends React.Component {
             <Section className="GameRoute">
                 <Game bank={this.props.bank} updateBank={this.props.updateBank}/>
             </Section>
-        )
-    }
-}
+        );
+    };
+};

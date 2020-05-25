@@ -8,13 +8,13 @@ export default class LoginRoute extends React.Component {
         history: {
             push: () => {},
         },
-    }
+    };
 
     handleLoginSuccess = () => {
-        const { location, history } = this.props
-        const destination = (location.state || {}).from || '/game'
-        history.push(destination)
-    }
+        const { location, history } = this.props;
+        const destination = (location.state || {}).from || '/game';
+        history.push(destination);
+    };
 
     render() {
         return (
@@ -25,6 +25,6 @@ export default class LoginRoute extends React.Component {
                   setUser={this.props.setUser}
                 />
             </Section>
-        )
-    }
-}
+        );
+    };
+};

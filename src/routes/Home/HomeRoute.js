@@ -9,6 +9,6 @@ export default class Home extends React.Component {
             <Section className="landing">
                 <Landing />
             </Section>
-        ) 
-    }
-}
+        );
+    };
+};
