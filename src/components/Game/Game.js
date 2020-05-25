@@ -127,8 +127,9 @@ export default class Game extends React.Component {
 
     //Enables the user to end the countdown early
     handleEndTimer = () => {
+        clearInterval(this.state.interval);
         this.setState({
-            timeRemaining: 0
+            timeRemaining: 0,
         });
         this.handleCompareNumbers();
     };
@@ -189,7 +190,7 @@ export default class Game extends React.Component {
                 <div className={this.state.modal}>
                     <div className='modal_content'>
                         <Button className='close' onClick={this.updateModal}>&times;</Button>
-                        <p>The next number was {this.state.displayNumber}.  Congratulations!  You won {wager} points!  Your new total is {this.props.bank} points. Keep it up!</p>
+                        <p>The next number was {this.state.displayNumber}.  Congratulations!  You won!  Your new total is {this.props.bank} points. Keep it up!</p>
                     </div>
                 </div>
             );
@@ -198,7 +199,7 @@ export default class Game extends React.Component {
                 <div className={this.state.modal}>
                     <div className='modal_content'>
                         <Button className='close' onClick={this.updateModal}>&times;</Button>
-                        <p>The next number was {this.state.displayNumber}.  Awww shucks!  You lost {wager} points.  Your new total is {this.props.bank} points.  Better luck next time!</p>
+                        <p>The next number was {this.state.displayNumber}.  Awww shucks!  You lost.  Your new total is {this.props.bank} points.  Better luck next time!</p>
                     </div>
                 </div>
             );
